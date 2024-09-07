@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "77862356548",
+    "project_id": "cce-stu",
+    "storage_bucket": "cce-stu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:77862356548:android:02d3db580f5d036b481e11",
+        "android_client_info": {
+          "package_name": "cce_app.com"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBnPyLQLjRoZG55gKnQ6FxtlzT2LJKMnJs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
