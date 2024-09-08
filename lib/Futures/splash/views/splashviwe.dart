@@ -1,4 +1,5 @@
-import 'package:cce_app/Futures/homeview/homeviwe.dart';
+import 'package:cce_app/Core/Constans/Constans.dart';
+import 'package:cce_app/Futures/Login/views/loginviwe.dart';
 import 'package:flutter/material.dart';
 import 'package:cce_app/Core/manager/imagesManger.dart';
 
@@ -14,10 +15,10 @@ class _SplashViewState extends State<SplashView> {
   void initState() {
     super.initState();
     // Navigate to the next screen after 4 seconds
-    Future.delayed(const Duration(seconds: 4), () {
+    Future.delayed(Duration(seconds: Constans.Duration_splash_screen), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
+        MaterialPageRoute(builder: (context) => const LoginView()),
       );
     });
   }
@@ -25,6 +26,7 @@ class _SplashViewState extends State<SplashView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color(0xfff8fefe),
       body: Center(
         child: Image.asset(Imagesmanger.CCE_Logo), // Display your logo
       ),

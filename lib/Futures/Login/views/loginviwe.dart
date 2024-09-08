@@ -1,0 +1,180 @@
+import 'package:cce_app/Core/manager/imagesManger.dart';
+import 'package:cce_app/Core/widgets/CustomButton.dart';
+import 'package:cce_app/Core/widgets/CustomLabelHintText.dart';
+import 'package:flutter/material.dart';
+
+class LoginView extends StatefulWidget {
+  const LoginView({super.key});
+
+  @override
+  _LoginViewState createState() => _LoginViewState();
+}
+
+class _LoginViewState extends State<LoginView> {
+  bool _isPasswordVisible = false;
+  bool _isRememberMeChecked = false;
+
+  @override
+  Widget build(BuildContext context) {
+    double height = MediaQuery.of(context).size.height;
+    return Scaffold(
+      backgroundColor: const Color(0xfff8fefe),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: height * 0.1),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Image.asset(
+                    Imagesmanger.factuleyofengginering,
+                    scale: 2,
+                  )
+                ],
+              ),
+              SizedBox(height: height * 0.15),
+              const CustomLabelHintText(
+                showAsterisk: true,
+                labelText: 'Enter your ID',
+              ),
+              // Student ID Text Field with shadow
+              Container(
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 1,
+                      blurRadius: 5,
+                      offset: const Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    labelStyle: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
+                    hintText: 'Student ID',
+                    hintStyle: const TextStyle(
+                      color: Colors.grey,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide.none,
+                    ),
+                    filled: true,
+                    fillColor: Colors.white,
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 16),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              const CustomLabelHintText(
+                showAsterisk: true,
+                labelText: 'Enter your password',
+              ),
+              // Password Text Field with shadow
+              Container(
+                decoration: BoxDecoration(
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 1,
+                      blurRadius: 5,
+                      offset: const Offset(0, 3), // changes position of shadow
+                    ),
+                  ],
+                ),
+                child: TextFormField(
+                  obscureText:
+                      !_isPasswordVisible, // toggle password visibility
+                  decoration: InputDecoration(
+                    labelStyle: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.black87,
+                    ),
+                    hintText: 'Password',
+                    hintStyle: const TextStyle(
+                      color: Colors.grey,
+                    ),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: BorderSide.none,
+                    ),
+                    filled: true,
+                    fillColor: Colors.white,
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 16),
+                    suffixIcon: IconButton(
+                      icon: Icon(
+                        _isPasswordVisible
+                            ? Icons.visibility
+                            : Icons.visibility_off,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _isPasswordVisible = !_isPasswordVisible;
+                        });
+                      },
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 8),
+              // Remember me and Forgot password
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: _isRememberMeChecked,
+                        onChanged: (value) {
+                          setState(() {
+                            _isRememberMeChecked = value!;
+                            if (_isRememberMeChecked) {
+                              print("GOOD basel"); // Prints when checked
+                            }
+                          });
+                        },
+                      ),
+                      const Text("Remember me"),
+                    ],
+                  ),
+                  TextButton(
+                    onPressed: () {
+                      // Handle forgot password action
+                    },
+                    child: const Text(
+                      "Forgot your password?",
+                      style: TextStyle(
+                        color: Colors.grey,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+
+              // Custom Login Button
+              CustomButton(
+                buttonColor: const Color(0xff23a7e5),
+                height: 55,
+                text: "Login",
+                onPressed: () {
+                  // Add your login logic here
+                },
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
