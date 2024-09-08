@@ -1,3 +1,4 @@
+import 'package:cce_app/Core/widgets/CustomTextFormField.dart';
 import 'package:flutter/material.dart';
 import 'package:cce_app/Core/manager/ColorsManager.dart';
 import 'package:cce_app/Core/manager/FontsManger.dart';
@@ -17,27 +18,24 @@ class _LoginViewState extends State<LoginView> {
   bool _isPasswordVisible = false;
   bool _isRememberMeChecked = false;
 
-  // This function is called when the checkbox is checked
+  final TextEditingController _idController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
   void _onRememberMeChecked() {
     print("Remember me checked");
-    // Add any additional functionality here, like saving preferences
   }
 
-  // This function is called when the checkbox is unchecked
   void _onRememberMeUnchecked() {
     print("Remember me unchecked");
-    // Add any additional functionality here
   }
 
-  // Handles the change in the checkbox value
   void _handleRememberMeChanged(bool? value) {
     setState(() {
       _isRememberMeChecked = value!;
-
       if (_isRememberMeChecked) {
-        _onRememberMeChecked(); // Run when checked
+        _onRememberMeChecked();
       } else {
-        _onRememberMeUnchecked(); // Run when unchecked
+        _onRememberMeUnchecked();
       }
     });
   }
@@ -69,92 +67,29 @@ class _LoginViewState extends State<LoginView> {
                 showAsterisk: true,
                 labelText: 'Enter your ID',
               ),
-              // Student ID Text Field with shadow
-              Container(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 1,
-                      blurRadius: 5,
-                      offset: const Offset(0, 3), // changes position of shadow
-                    ),
-                  ],
-                ),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    labelStyle: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
-                    hintText: 'Student ID',
-                    hintStyle: const TextStyle(
-                      color: Colors.grey,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide.none,
-                    ),
-                    filled: true,
-                    fillColor: Colors.white,
-                    contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 16),
-                  ),
-                ),
+              // Reuse CustomTextFormField for ID
+              CustomTextFormField(
+                hintText: 'Student ID',
+                controller: _idController,
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: height * 0.02),
               const CustomLabelHintText(
                 showAsterisk: true,
                 labelText: 'Enter your password',
               ),
-              // Password Text Field with shadow
-              Container(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.grey.withOpacity(0.5),
-                      spreadRadius: 1,
-                      blurRadius: 5,
-                      offset: const Offset(0, 3), // changes position of shadow
-                    ),
-                  ],
-                ),
-                child: TextFormField(
-                  obscureText:
-                      !_isPasswordVisible, // toggle password visibility
-                  decoration: InputDecoration(
-                    labelStyle: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: Colors.black87,
-                    ),
-                    hintText: 'Password',
-                    hintStyle: const TextStyle(
-                      color: Colors.grey,
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      borderSide: BorderSide.none,
-                    ),
-                    filled: true,
-                    fillColor: Colors.white,
-                    contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 16),
-                    suffixIcon: IconButton(
-                      icon: Icon(
-                        _isPasswordVisible
-                            ? Icons.visibility
-                            : Icons.visibility_off,
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _isPasswordVisible = !_isPasswordVisible;
-                        });
-                      },
-                    ),
-                  ),
-                ),
+              // Reuse CustomTextFormField for Password
+              CustomTextFormField(
+                hintText: 'Password',
+                isPasswordField: true,
+                isPasswordVisible: _isPasswordVisible,
+                onSuffixIconPressed: () {
+                  setState(() {
+                    _isPasswordVisible = !_isPasswordVisible;
+                  });
+                },
+                controller: _passwordController,
               ),
-              const SizedBox(height: 8),
+              SizedBox(height: height * 0.01),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -163,7 +98,7 @@ class _LoginViewState extends State<LoginView> {
                       CustomCheckbox(
                         isChecked: _isRememberMeChecked,
                         onChanged: _handleRememberMeChanged,
-                        onChecked: _onRememberMeChecked, // Run when checked
+                        onChecked: _onRememberMeChecked,
                       ),
                       Text(
                         "Remember me",
@@ -171,7 +106,7 @@ class _LoginViewState extends State<LoginView> {
                           fontFamily: Fontsmanger.AbhayaLibreMeduiem,
                           color: ColorsManager.coustomLabelTextColor,
                           fontWeight: FontWeight.w800,
-                          fontSize: 16, // You can adjust the font size
+                          fontSize: 16,
                         ),
                       ),
                     ],
@@ -189,7 +124,6 @@ class _LoginViewState extends State<LoginView> {
                 ],
               ),
               SizedBox(height: height * 0.01),
-              // Custom Login Button
               CustomButton(
                 buttonColor: ColorsManager.buttonColor,
                 height: 55,
@@ -212,10 +146,8 @@ class _LoginViewState extends State<LoginView> {
                         text: "Sign up",
                         style: TextStyle(
                           fontFamily: Fontsmanger.AbhayaLibreMeduiem,
-
                           fontSize: 12,
-                          color: Colors.blueGrey[
-                              800], // Adjust the color as per the image
+                          color: Colors.blueGrey[800],
                           fontWeight: FontWeight.bold,
                           decoration: TextDecoration.underline,
                         ),
