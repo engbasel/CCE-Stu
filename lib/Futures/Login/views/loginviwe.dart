@@ -188,7 +188,7 @@ class _LoginViewState extends State<LoginView> {
                   ),
                 ],
               ),
-              const SizedBox(height: 16),
+              SizedBox(height: height * 0.01),
               // Custom Login Button
               CustomButton(
                 buttonColor: ColorsManager.buttonColor,
@@ -196,6 +196,34 @@ class _LoginViewState extends State<LoginView> {
                 text: "Login",
                 onPressed: () {},
               ),
+              SizedBox(height: height * 0.01),
+              Center(
+                child: RichText(
+                  textAlign: TextAlign.center,
+                  text: TextSpan(
+                    text: "Don’t have an account ? ",
+                    style: TextStyle(
+                      fontFamily: Fontsmanger.AbhayaLibreMeduiem,
+                      color: Colors.grey[500],
+                      fontSize: 12,
+                    ),
+                    children: [
+                      TextSpan(
+                        text: "Sign up",
+                        style: TextStyle(
+                          fontFamily: Fontsmanger.AbhayaLibreMeduiem,
+
+                          fontSize: 12,
+                          color: Colors.blueGrey[
+                              800], // Adjust the color as per the image
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              )
             ],
           ),
         ),
