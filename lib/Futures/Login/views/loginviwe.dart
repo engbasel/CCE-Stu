@@ -1,4 +1,5 @@
 import 'package:cce_app/Core/widgets/CustomTextFormField.dart';
+import 'package:cce_app/Futures/ForgetPassword/views/ForgetPassword.dart';
 import 'package:cce_app/Futures/Signup/views/Signupview.dart';
 import 'package:flutter/material.dart';
 import 'package:cce_app/Core/manager/ColorsManager.dart';
@@ -68,6 +69,7 @@ class _LoginViewState extends State<LoginView> {
                 showAsterisk: true,
                 labelText: 'Enter your ID',
               ),
+
               // Reuse CustomTextFormField for ID
               CustomTextFormField(
                 hintText: 'Student ID',
@@ -113,7 +115,13 @@ class _LoginViewState extends State<LoginView> {
                     ],
                   ),
                   TextButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return const Forgetpassword();
+                        },
+                      ));
+                    },
                     child: Text(
                       "Forgot your password?",
                       style: TextStyle(
@@ -140,23 +148,37 @@ class _LoginViewState extends State<LoginView> {
                     style: TextStyle(
                       fontFamily: Fontsmanger.AbhayaLibreMeduiem,
                       color: Colors.grey[500],
-                      fontSize: 12,
+                      fontSize: 14,
                     ),
                     children: [
-                      TextSpan(
-                        text: "Sign up",
-                        style: TextStyle(
-                          fontFamily: Fontsmanger.AbhayaLibreMeduiem,
-                          fontSize: 12,
-                          color: Colors.blueGrey[800],
-                          fontWeight: FontWeight.bold,
-                          decoration: TextDecoration.underline,
+                      WidgetSpan(
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) {
+                                  return const SignupView();
+                                },
+                              ),
+                            );
+                          },
+                          child: Text(
+                            "Sign up",
+                            style: TextStyle(
+                              fontFamily: Fontsmanger.AbhayaLibreMeduiem,
+                              fontSize: 14,
+                              color: Colors.blueGrey[800],
+                              fontWeight: FontWeight.bold,
+                              decoration: TextDecoration.underline,
+                            ),
+                          ),
                         ),
                       ),
                     ],
                   ),
                 ),
-              )
+              ),
             ],
           ),
         ),
