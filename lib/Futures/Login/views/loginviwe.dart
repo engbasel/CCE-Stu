@@ -1,4 +1,5 @@
 import 'package:cce_app/Core/widgets/CustomTextFormField.dart';
+import 'package:cce_app/Futures/Signup/views/Signupview.dart';
 import 'package:flutter/material.dart';
 import 'package:cce_app/Core/manager/ColorsManager.dart';
 import 'package:cce_app/Core/manager/FontsManger.dart';
@@ -15,8 +16,8 @@ class LoginView extends StatefulWidget {
 }
 
 class _LoginViewState extends State<LoginView> {
-  bool _isPasswordVisible = false;
-  bool _isRememberMeChecked = false;
+  bool isPasswordVisible = false;
+  bool isRememberMeChecked = false;
 
   final TextEditingController _idController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -31,8 +32,8 @@ class _LoginViewState extends State<LoginView> {
 
   void _handleRememberMeChanged(bool? value) {
     setState(() {
-      _isRememberMeChecked = value!;
-      if (_isRememberMeChecked) {
+      isRememberMeChecked = value!;
+      if (isRememberMeChecked) {
         _onRememberMeChecked();
       } else {
         _onRememberMeUnchecked();
@@ -72,7 +73,7 @@ class _LoginViewState extends State<LoginView> {
                 hintText: 'Student ID',
                 controller: _idController,
               ),
-              SizedBox(height: height * 0.02),
+              SizedBox(height: height * 0.06),
               const CustomLabelHintText(
                 showAsterisk: true,
                 labelText: 'Enter your password',
@@ -81,10 +82,10 @@ class _LoginViewState extends State<LoginView> {
               CustomTextFormField(
                 hintText: 'Password',
                 isPasswordField: true,
-                isPasswordVisible: _isPasswordVisible,
+                isPasswordVisible: isPasswordVisible,
                 onSuffixIconPressed: () {
                   setState(() {
-                    _isPasswordVisible = !_isPasswordVisible;
+                    isPasswordVisible = !isPasswordVisible;
                   });
                 },
                 controller: _passwordController,
@@ -96,7 +97,7 @@ class _LoginViewState extends State<LoginView> {
                   Row(
                     children: [
                       CustomCheckbox(
-                        isChecked: _isRememberMeChecked,
+                        isChecked: isRememberMeChecked,
                         onChanged: _handleRememberMeChanged,
                         onChecked: _onRememberMeChecked,
                       ),

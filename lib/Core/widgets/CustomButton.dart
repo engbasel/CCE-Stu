@@ -6,11 +6,13 @@ class CustomButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
   final double width; // Add width parameter
+  // ignore: non_constant_identifier_names
   Color TextColor;
   Color buttonColor;
 
   final double height; // Add height parameter
   CustomButton({
+    // ignore: non_constant_identifier_names
     this.TextColor = Colors.white,
     this.buttonColor = Colors.blue,
     required this.text,
