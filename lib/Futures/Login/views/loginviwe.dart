@@ -1,7 +1,10 @@
+import 'package:flutter/material.dart';
+import 'package:cce_app/Core/manager/ColorsManager.dart';
+import 'package:cce_app/Core/manager/FontsManger.dart';
 import 'package:cce_app/Core/manager/imagesManger.dart';
 import 'package:cce_app/Core/widgets/CustomButton.dart';
 import 'package:cce_app/Core/widgets/CustomLabelHintText.dart';
-import 'package:flutter/material.dart';
+import 'package:cce_app/Core/widgets/customcheckbox.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
@@ -14,11 +17,36 @@ class _LoginViewState extends State<LoginView> {
   bool _isPasswordVisible = false;
   bool _isRememberMeChecked = false;
 
+  // This function is called when the checkbox is checked
+  void _onRememberMeChecked() {
+    print("Remember me checked");
+    // Add any additional functionality here, like saving preferences
+  }
+
+  // This function is called when the checkbox is unchecked
+  void _onRememberMeUnchecked() {
+    print("Remember me unchecked");
+    // Add any additional functionality here
+  }
+
+  // Handles the change in the checkbox value
+  void _handleRememberMeChanged(bool? value) {
+    setState(() {
+      _isRememberMeChecked = value!;
+
+      if (_isRememberMeChecked) {
+        _onRememberMeChecked(); // Run when checked
+      } else {
+        _onRememberMeUnchecked(); // Run when unchecked
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: const Color(0xfff8fefe),
+      backgroundColor: ColorsManager.backgroundScaffoldColor,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: SingleChildScrollView(
@@ -127,33 +155,33 @@ class _LoginViewState extends State<LoginView> {
                 ),
               ),
               const SizedBox(height: 8),
-              // Remember me and Forgot password
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Row(
                     children: [
-                      Checkbox(
-                        value: _isRememberMeChecked,
-                        onChanged: (value) {
-                          setState(() {
-                            _isRememberMeChecked = value!;
-                            if (_isRememberMeChecked) {
-                              print("GOOD basel"); // Prints when checked
-                            }
-                          });
-                        },
+                      CustomCheckbox(
+                        isChecked: _isRememberMeChecked,
+                        onChanged: _handleRememberMeChanged,
+                        onChecked: _onRememberMeChecked, // Run when checked
                       ),
-                      const Text("Remember me"),
+                      Text(
+                        "Remember me",
+                        style: TextStyle(
+                          fontFamily: Fontsmanger.AbhayaLibreMeduiem,
+                          color: ColorsManager.coustomLabelTextColor,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 16, // You can adjust the font size
+                        ),
+                      ),
                     ],
                   ),
                   TextButton(
-                    onPressed: () {
-                      // Handle forgot password action
-                    },
-                    child: const Text(
+                    onPressed: () {},
+                    child: Text(
                       "Forgot your password?",
                       style: TextStyle(
+                        fontFamily: Fontsmanger.AbhayaLibreMeduiem,
                         color: Colors.grey,
                       ),
                     ),
@@ -161,15 +189,12 @@ class _LoginViewState extends State<LoginView> {
                 ],
               ),
               const SizedBox(height: 16),
-
               // Custom Login Button
               CustomButton(
-                buttonColor: const Color(0xff23a7e5),
+                buttonColor: ColorsManager.buttonColor,
                 height: 55,
                 text: "Login",
-                onPressed: () {
-                  // Add your login logic here
-                },
+                onPressed: () {},
               ),
             ],
           ),
