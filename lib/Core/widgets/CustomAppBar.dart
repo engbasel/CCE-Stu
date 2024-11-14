@@ -1,3 +1,4 @@
+import 'package:cce_app/Core/manager/ColorsManager.dart';
 import 'package:flutter/material.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -9,7 +10,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
       title: const Text('Home'),
-      backgroundColor: Colors.blueAccent, // Customize AppBar color
+      backgroundColor: ColorsManager.AppBarColor, // Customize AppBar color
       actions: [
         IconButton(
           icon: const Icon(Icons.search),

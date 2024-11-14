@@ -1,3 +1,4 @@
+import 'package:cce_app/Core/manager/ColorsManager.dart';
 import 'package:cce_app/Core/widgets/CustomAppBar.dart';
 import 'package:cce_app/Futures/Home/widget/CustomDrawer.dart';
 import 'package:cce_app/Futures/Home/widget/HomeViewboady.dart';
@@ -10,6 +11,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorsManager.backgroundScaffoldColor,
       appBar: CustomAppBar(), // This now works fine
       drawer: Custom_Drawer(),
       body: Padding(

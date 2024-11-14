@@ -1,3 +1,5 @@
+import 'package:cce_app/Core/manager/ColorsManager.dart';
+import 'package:cce_app/Core/widgets/CustomSmallButton.dart';
 import 'package:cce_app/Core/widgets/GPAProgressWidget.dart';
 import 'package:flutter/material.dart';
 
@@ -36,7 +38,10 @@ class _HomeViewboadyState extends State<HomeViewboady> {
           // Announcements Section
           const Text(
             'Important Announcements:',
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: ColorsManager.coustomLabelTextColor,
+            ),
           ),
           const SizedBox(height: 8.0),
           Container(
@@ -51,7 +56,10 @@ class _HomeViewboadyState extends State<HomeViewboady> {
           // Upcoming Deadlines
           const Text(
             'Upcoming Deadlines & Events:',
-            style: TextStyle(fontWeight: FontWeight.bold),
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: ColorsManager.coustomLabelTextColor,
+            ),
           ),
           const SizedBox(height: 8.0),
           ListTile(
@@ -137,23 +145,23 @@ class _HomeViewboadyState extends State<HomeViewboady> {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                ElevatedButton(
-                  onPressed: () {
-                    // Navigate to study resources page
-                  },
-                  child: const Text('View Study Materials'),
+                CustomSmallButton(
+                  text: 'youtube Channel',
+                  height: 30,
+                  width: 180,
+                  onPressed: () {},
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    // Navigate to study resources page
-                  },
-                  child: const Text('Youtube Chanel'),
+                CustomSmallButton(
+                  text: 'View Study Materials',
+                  height: 30,
+                  width: 180,
+                  onPressed: () {},
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    // Navigate to study resources page
-                  },
-                  child: const Text('Googel drive'),
+                CustomSmallButton(
+                  text: 'Googel Drive',
+                  height: 30,
+                  width: 160,
+                  onPressed: () {},
                 ),
               ],
             ),
