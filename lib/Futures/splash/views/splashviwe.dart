@@ -1,5 +1,5 @@
 import 'package:cce_app/Core/Constans/Constans.dart';
-import 'package:cce_app/Futures/Login/views/loginviwe.dart';
+import 'package:cce_app/Futures/auth/Login/views/loginviwe.dart';
 import 'package:flutter/material.dart';
 import 'package:cce_app/Core/manager/imagesManger.dart';
 

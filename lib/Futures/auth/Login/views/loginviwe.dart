@@ -1,26 +1,28 @@
+import 'package:cce_app/Core/widgets/CustomTextFormField.dart';
+import 'package:cce_app/Futures/auth/ForgetPassword/views/ForgetPassword.dart';
+import 'package:cce_app/Futures/auth/Signup/views/Signupview.dart';
+import 'package:flutter/material.dart';
 import 'package:cce_app/Core/manager/ColorsManager.dart';
 import 'package:cce_app/Core/manager/FontsManger.dart';
 import 'package:cce_app/Core/manager/imagesManger.dart';
 import 'package:cce_app/Core/widgets/CustomButton.dart';
 import 'package:cce_app/Core/widgets/CustomLabelHintText.dart';
-import 'package:cce_app/Core/widgets/CustomTextFormField.dart';
 import 'package:cce_app/Core/widgets/customcheckbox.dart';
-import 'package:cce_app/Futures/Login/views/loginviwe.dart';
-import 'package:flutter/material.dart';
 
-class SignupView extends StatefulWidget {
-  static const routeName = 'SignupView';
-
-  const SignupView({super.key});
+class LoginView extends StatefulWidget {
+  const LoginView({super.key});
+  static const routeName = 'LoginView';
 
   @override
-  State<SignupView> createState() => _SignupViewState();
+  _LoginViewState createState() => _LoginViewState();
 }
 
-class _SignupViewState extends State<SignupView> {
-  final TextEditingController _passwordController = TextEditingController();
+class _LoginViewState extends State<LoginView> {
   bool isPasswordVisible = false;
   bool isRememberMeChecked = false;
+
+  final TextEditingController _idController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
   void _onRememberMeChecked() {
     print("Remember me checked");
@@ -44,53 +46,42 @@ class _SignupViewState extends State<SignupView> {
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
-
     return Scaffold(
       backgroundColor: ColorsManager.backgroundScaffoldColor,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: SingleChildScrollView(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: height * 0.1),
-              Align(
-                alignment: Alignment.centerRight,
-                child: Image.asset(
-                  Imagesmanger.factuleyofengginering,
-                  scale: 2,
-                ),
-              ),
-              SizedBox(height: height * 0.05),
-              const CustomLabelHintText(
-                showAsterisk: true,
-                labelText: 'Enter your name',
-              ),
-              SizedBox(height: height * 0.003),
-              const Row(
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Expanded(
-                    child: CustomTextFormField(hintText: 'First Name '),
-                  ),
-                  SizedBox(width: 10), // Spacing between the fields
-                  Expanded(
-                    child: CustomTextFormField(hintText: 'Last Name '),
-                  ),
+                  Image.asset(
+                    Imagesmanger.factuleyofengginering,
+                    scale: 2,
+                  )
                 ],
               ),
-              const SizedBox(height: 20),
+              SizedBox(height: height * 0.15),
               const CustomLabelHintText(
-                labelText: 'Enter your email ',
                 showAsterisk: true,
+                labelText: 'Enter your ID',
               ),
-              SizedBox(height: height * 0.003),
-              const CustomTextFormField(hintText: '*****@std.mans.edu.eg'),
-              const SizedBox(height: 20),
+
+              // Reuse CustomTextFormField for ID
+              CustomTextFormField(
+                hintText: 'Student ID',
+                controller: _idController,
+              ),
+              SizedBox(height: height * 0.06),
               const CustomLabelHintText(
-                labelText: 'Enter your password ',
                 showAsterisk: true,
+                labelText: 'Enter your password',
               ),
-              SizedBox(height: height * 0.003),
+              // Reuse CustomTextFormField for Password
               CustomTextFormField(
                 hintText: 'Password',
                 isPasswordField: true,
@@ -102,51 +93,51 @@ class _SignupViewState extends State<SignupView> {
                 },
                 controller: _passwordController,
               ),
-              const SizedBox(height: 20),
-              const CustomLabelHintText(
-                labelText: 'Confirm password ',
-                showAsterisk: true,
-              ),
-              SizedBox(height: height * 0.003),
-              CustomTextFormField(
-                hintText: 'Enter the password again',
-                isPasswordField: true,
-                isPasswordVisible: isPasswordVisible,
-                onSuffixIconPressed: () {
-                  setState(() {
-                    isPasswordVisible = !isPasswordVisible;
-                  });
-                },
-                controller: _passwordController,
-              ),
-              const SizedBox(height: 20),
+              SizedBox(height: height * 0.01),
               Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  CustomCheckbox(
-                    isChecked: isRememberMeChecked,
-                    onChanged: _handleRememberMeChanged,
-                    onChecked: _onRememberMeChecked,
+                  Row(
+                    children: [
+                      CustomCheckbox(
+                        isChecked: isRememberMeChecked,
+                        onChanged: _handleRememberMeChanged,
+                        onChecked: _onRememberMeChecked,
+                      ),
+                      Text(
+                        "Remember me",
+                        style: TextStyle(
+                          fontFamily: Fontsmanger.AbhayaLibreMeduiem,
+                          color: ColorsManager.coustomLabelTextColor,
+                          fontWeight: FontWeight.w800,
+                          fontSize: 16,
+                        ),
+                      ),
+                    ],
                   ),
-                  Expanded(
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) {
+                          return const Forgetpassword();
+                        },
+                      ));
+                    },
                     child: Text(
-                      textAlign: TextAlign.start,
-                      "I understand and agree to the Stanley Terms of Service",
+                      "Forgot your password?",
                       style: TextStyle(
                         fontFamily: Fontsmanger.AbhayaLibreMeduiem,
-                        color: ColorsManager.coustomLabelTextColor,
-                        fontWeight: FontWeight.w800,
-                        fontSize: 16,
+                        color: Colors.grey,
                       ),
                     ),
                   ),
                 ],
               ),
-              const SizedBox(height: 30),
+              SizedBox(height: height * 0.01),
               CustomButton(
                 buttonColor: ColorsManager.buttonColor,
                 height: 55,
-                text: "Create account",
+                text: "Login",
                 onPressed: () {},
               ),
               SizedBox(height: height * 0.01),
@@ -154,11 +145,11 @@ class _SignupViewState extends State<SignupView> {
                 child: RichText(
                   textAlign: TextAlign.center,
                   text: TextSpan(
-                    text: "Already have an account?  ",
+                    text: "Don’t have an account ? ",
                     style: TextStyle(
                       fontFamily: Fontsmanger.AbhayaLibreMeduiem,
                       color: Colors.grey[500],
-                      fontSize: 15,
+                      fontSize: 14,
                     ),
                     children: [
                       WidgetSpan(
@@ -168,13 +159,13 @@ class _SignupViewState extends State<SignupView> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) {
-                                  return const LoginView();
+                                  return const SignupView();
                                 },
                               ),
                             );
                           },
                           child: Text(
-                            "Login",
+                            "Sign up",
                             style: TextStyle(
                               fontFamily: Fontsmanger.AbhayaLibreMeduiem,
                               fontSize: 14,
@@ -189,7 +180,6 @@ class _SignupViewState extends State<SignupView> {
                   ),
                 ),
               ),
-              const SizedBox(height: 20),
             ],
           ),
         ),
