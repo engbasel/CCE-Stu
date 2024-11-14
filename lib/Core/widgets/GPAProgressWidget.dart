@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class ProgressWidget extends StatelessWidget {
+class ProgressSection extends StatelessWidget {
   // Parameters to customize the widget
   final String title;
   final String
@@ -12,7 +12,7 @@ class ProgressWidget extends StatelessWidget {
   final Color lowProgressColor; // Color for low progress
   final Color highProgressColor; // Color for high progress
 
-  const ProgressWidget({
+  const ProgressSection({
     Key? key,
     required this.title,
     required this.progressLabel,

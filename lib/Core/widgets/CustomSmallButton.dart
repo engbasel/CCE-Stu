@@ -1,49 +1,56 @@
-// ignore_for_file: must_be_immutable
-
 import 'package:flutter/material.dart';
 
 class CustomSmallButton extends StatelessWidget {
   final String text;
   final VoidCallback onPressed;
   final double width;
-  Color textColor;
-  Color buttonColor;
+  final Color textColor;
+  final Color buttonColor;
   final double height;
+  final Icon? icon; // Optional icon for the button
 
   CustomSmallButton({
     Key? key,
-    this.textColor = Colors.white,
-    this.buttonColor = Colors.blue,
     required this.text,
-    required this.height,
     required this.onPressed,
     this.width = double.infinity, // Default to full width
+    this.textColor = Colors.white,
+    this.buttonColor = Colors.blue,
+    required this.height,
+    this.icon, // Optional icon parameter
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       height: height,
-      width: width, // Use the passed width value
+      width: width,
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: buttonColor,
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-                16), // Smaller border radius for a smaller look
+            borderRadius: BorderRadius.circular(12), // Smaller border radius
           ),
           padding: const EdgeInsets.symmetric(
-              horizontal: 20,
-              vertical: 8), // Reduced padding for a more compact button
+              horizontal: 16, vertical: 8), // Compact padding
         ),
-        child: Text(
-          text,
-          style: TextStyle(
-            fontSize: 14, // Smaller font size for a smaller button
-            fontWeight: FontWeight.w500, // Slightly bolder text for visibility
-            color: textColor,
-          ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            if (icon != null) ...[
+              icon!, // Display icon if provided
+              const SizedBox(width: 8), // Space between icon and text
+            ],
+            Text(
+              text,
+              style: TextStyle(
+                fontSize: 14, // Slightly smaller font for a compact button
+                fontWeight: FontWeight.w500,
+                color: textColor,
+              ),
+            ),
+          ],
         ),
       ),
     );
