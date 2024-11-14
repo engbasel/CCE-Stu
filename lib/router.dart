@@ -15,8 +15,8 @@ Route onGenerateRoute(RouteSettings settings) {
       return MaterialPageRoute(builder: (context) => const LoginView());
     case SignupView.routeName:
       return MaterialPageRoute(builder: (context) => const SignupView());
-    case HomePage.routeName:
-      return MaterialPageRoute(builder: (context) => const HomePage());
+    case HomeView.routeName:
+      return MaterialPageRoute(builder: (context) => const HomeView());
     default:
       return MaterialPageRoute(builder: (context) => const Scaffold());
   }
