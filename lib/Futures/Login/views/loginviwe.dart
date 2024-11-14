@@ -11,6 +11,7 @@ import 'package:cce_app/Core/widgets/customcheckbox.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
+  static const routeName = 'LoginView';
 
   @override
   _LoginViewState createState() => _LoginViewState();

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:cce_app/Core/manager/imagesManger.dart';
 
 class SplashView extends StatefulWidget {
+  static const routeName = 'SplashView';
+
   const SplashView({super.key});
 
   @override

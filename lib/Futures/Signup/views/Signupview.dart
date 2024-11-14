@@ -9,6 +9,8 @@ import 'package:cce_app/Futures/Login/views/loginviwe.dart';
 import 'package:flutter/material.dart';
 
 class SignupView extends StatefulWidget {
+  static const routeName = 'SignupView';
+
   const SignupView({super.key});
 
   @override

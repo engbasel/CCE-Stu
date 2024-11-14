@@ -1,3 +1,4 @@
+import 'package:cce_app/router.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:cce_app/Futures/splash/views/splashviwe.dart';
@@ -19,6 +20,7 @@ class CCE_APP extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      onGenerateRoute: onGenerateRoute,
       debugShowCheckedModeBanner: false,
       title: 'CCE App',
       theme: ThemeData(
