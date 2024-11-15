@@ -9,8 +9,7 @@ import 'generated/l10n.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
-    options: DefaultFirebaseOptions
-        .currentPlatform, // Make sure you have this set up
+    options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const CCE_APP());
 }
@@ -22,6 +21,7 @@ class CCE_APP extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       localizationsDelegates: [
         S.delegate,
         GlobalMaterialLocalizations.delegate,

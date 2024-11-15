@@ -10,13 +10,21 @@ class CoursesSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text(
-            'Current Courses - Term 1:',
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 20,
-              color: Colors.blueAccent,
-            ),
+          Row(
+            children: [
+              const Text(
+                'Current Courses - Term 1:',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 20,
+                  color: Colors.blueAccent,
+                ),
+              ),
+              Text(
+                '${DateTime.now().year},     total credit hours: 10',
+                style: TextStyle(color: Colors.grey),
+              ),
+            ],
           ),
           const SizedBox(height: 16.0),
           // Horizontal Scroll for Courses

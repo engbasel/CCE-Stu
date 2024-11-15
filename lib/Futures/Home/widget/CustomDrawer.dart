@@ -8,6 +8,10 @@ class Custom_Drawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      surfaceTintColor: Colors.white,
+      elevation: 0,
+      shadowColor: Colors.amber,
+      backgroundColor: Colors.white,
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
