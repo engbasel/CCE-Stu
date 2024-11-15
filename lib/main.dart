@@ -1,8 +1,10 @@
-import 'package:cce_app/Futures/Home/view/homeviwe.dart';
+import 'package:cce_app/Futures/auth/Login/views/loginviwe.dart';
 import 'package:cce_app/router.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart'; // Automatically generated for your project
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'generated/l10n.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,14 +22,19 @@ class CCE_APP extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      localizationsDelegates: [
+        S.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: S.delegate.supportedLocales,
       onGenerateRoute: onGenerateRoute,
-      debugShowCheckedModeBanner: false,
-      title: 'CCE App',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomeView(), // Start with SplashView
+      home: const LoginView(), // Start with SplashView
     );
   }
 }

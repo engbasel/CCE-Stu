@@ -1,4 +1,5 @@
 import 'package:cce_app/Core/widgets/CustomTextFormField.dart';
+import 'package:cce_app/Futures/Home/view/homeviwe.dart';
 import 'package:cce_app/Futures/auth/ForgetPassword/views/ForgetPassword.dart';
 import 'package:cce_app/Futures/auth/Signup/views/Signupview.dart';
 import 'package:flutter/material.dart';
@@ -138,7 +139,11 @@ class _LoginViewState extends State<LoginView> {
                 buttonColor: ColorsManager.buttonColor,
                 height: 55,
                 text: "Login",
-                onPressed: () {},
+                onPressed: () {
+                  // Add your login logic here
+
+                  Navigator.popAndPushNamed(context, HomeView.routeName);
+                },
               ),
               SizedBox(height: height * 0.01),
               Center(
