@@ -10,21 +10,26 @@ class CoursesSection extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              const Text(
-                'Current Courses - Term 1:',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                  color: Colors.blueAccent,
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Current Courses - Term 1',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 14,
+                    color: Colors.blueAccent,
+                  ),
                 ),
-              ),
-              Text(
-                '${DateTime.now().year},     total credit hours: 10',
-                style: TextStyle(color: Colors.grey),
-              ),
-            ],
+                SizedBox(width: 16),
+                Text(
+                  'Total Credit Hours: 10',
+                  style: const TextStyle(color: Colors.grey, fontSize: 14),
+                ),
+              ],
+            ),
           ),
           const SizedBox(height: 16.0),
           // Horizontal Scroll for Courses
@@ -33,30 +38,33 @@ class CoursesSection extends StatelessWidget {
             child: Row(
               children: [
                 // Course 1 - Data Structures
-                _buildCourseCard(
+                buildCourseCard(
                   context,
                   courseName: 'Data Structures',
                   professorName: 'Dr. Ahmed',
                   creditHours: 3,
                   courseColor: Colors.blueAccent,
+                  icon: Icons.storage,
                 ),
                 const SizedBox(width: 8.0),
                 // Course 2 - Algorithms
-                _buildCourseCard(
+                buildCourseCard(
                   context,
                   courseName: 'Algorithms',
                   professorName: 'Dr. Sara',
                   creditHours: 4,
                   courseColor: Colors.orange,
+                  icon: Icons.calculate,
                 ),
                 const SizedBox(width: 8.0),
                 // Course 3 - Discrete Math
-                _buildCourseCard(
+                buildCourseCard(
                   context,
                   courseName: 'Discrete Math',
                   professorName: 'Dr. Amina',
                   creditHours: 3,
                   courseColor: Colors.green,
+                  icon: Icons.functions,
                 ),
               ],
             ),
@@ -66,65 +74,81 @@ class CoursesSection extends StatelessWidget {
     );
   }
 
-  Widget _buildCourseCard(
+  Widget buildCourseCard(
     BuildContext context, {
     required String courseName,
     required String professorName,
     required int creditHours,
     required Color courseColor,
+    required IconData icon,
   }) {
-    return Card(
-      elevation: 5,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(15),
-      ),
-      color: courseColor, // Light background for the card
-      // color: courseColor.withOpacity(0.1), // Light background for the card
-      child: Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: Column(
-          children: [
-            // Course Info
-            Text(
-              courseName,
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: courseColor,
-              ),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              'Professor: $professorName',
-              style: const TextStyle(
-                fontSize: 14,
+    return Container(
+      width: 160,
+      child: Card(
+        elevation: 3,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        color: courseColor.withOpacity(0.9), // Light background for the card
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // Course Icon
+              Icon(
+                icon,
+                size: 40,
                 color: Colors.white,
               ),
-            ),
-            const SizedBox(height: 4),
-            Text(
-              'Credit Hours: $creditHours',
-              style: const TextStyle(
-                fontSize: 14,
-                color: Colors.white,
+              const SizedBox(height: 8),
+              // Course Info
+              Text(
+                courseName,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
-            ),
-            const SizedBox(height: 8),
-            // View Details Button
-            TextButton(
-              onPressed: () {
-                // Navigate to the course details page
-              },
-              style: TextButton.styleFrom(
-                foregroundColor: courseColor,
-                textStyle: const TextStyle(fontSize: 14),
+              const SizedBox(height: 4),
+              Text(
+                'Professor: $professorName',
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: Colors.white70,
+                ),
               ),
-              child: const Text(
-                'View Details',
-                style: TextStyle(color: Colors.white),
+              const SizedBox(height: 4),
+              Text(
+                'Credit Hours: $creditHours',
+                style: const TextStyle(
+                  fontSize: 14,
+                  color: Colors.white70,
+                ),
               ),
-            ),
-          ],
+              const SizedBox(height: 8),
+              // View Details Button
+              ElevatedButton(
+                onPressed: () {
+                  // Navigate to the course details page
+                },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.white,
+                  elevation: 2,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                child: Text(
+                  'View Details',
+                  style: TextStyle(color: courseColor, fontSize: 14),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

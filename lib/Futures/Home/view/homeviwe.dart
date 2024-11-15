@@ -13,7 +13,7 @@ class HomeView extends StatelessWidget {
     return Scaffold(
       backgroundColor: ColorsManager.backgroundScaffoldColor,
       appBar: CustomAppBar(), // This now works fine
-      drawer: Custom_Drawer(),
+      drawer: CustomDrawer(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: HomeViewboady(),
