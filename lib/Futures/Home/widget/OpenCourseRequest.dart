@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
 
 class OpenCourseRequest extends StatelessWidget {
   const OpenCourseRequest({Key? key}) : super(key: key);
@@ -10,8 +13,9 @@ class OpenCourseRequest extends StatelessWidget {
         title: const Text('Open Course Request'),
         actions: [
           IconButton(
-            onPressed: () {
-              // Handle print functionality
+            onPressed: () async {
+              // Generate and print the PDF
+              await _generatePdf();
             },
             icon: const Icon(Icons.print),
           ),
@@ -31,15 +35,15 @@ class OpenCourseRequest extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
                 const SizedBox(height: 10),
-                _buildTextField('Name'),
-                _buildTextField('Student ID'),
-                _buildTextField('Phone Number'),
-                _buildTextField('Study Level'),
-                _buildTextField('Program (e.g., CCE)'),
-                _buildTextField('Academic Year'),
-                _buildTextField('Semester GPA'),
-                _buildTextField('Cumulative GPA'),
-                _buildTextField('Completed Credit Hours'),
+                buildTextField('Name'),
+                buildTextField('Student ID'),
+                buildTextField('Phone Number'),
+                buildTextField('Study Level'),
+                buildTextField('Program (e.g., CCE)'),
+                buildTextField('Academic Year'),
+                buildTextField('Semester GPA'),
+                buildTextField('Cumulative GPA'),
+                buildTextField('Completed Credit Hours'),
                 const SizedBox(height: 20),
 
                 // Section: Add Course Requests
@@ -48,7 +52,7 @@ class OpenCourseRequest extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
                 const SizedBox(height: 10),
-                _buildCourseFields('Add Course'),
+                buildCourseFields('Add Course'),
                 const SizedBox(height: 20),
 
                 // Section: Delete Course Requests
@@ -64,10 +68,10 @@ class OpenCourseRequest extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return Column(
                       children: [
-                        _buildTextField('Course Code'),
-                        _buildTextField('Course Name'),
-                        _buildTextField('Workload Before Deletion'),
-                        _buildTextField('Workload After Deletion'),
+                        buildTextField('Course Code'),
+                        buildTextField('Course Name'),
+                        buildTextField('Workload Before Deletion'),
+                        buildTextField('Workload After Deletion'),
                         const Text('Reason for Deletion'),
                         const SizedBox(height: 5),
                         DropdownButtonFormField<String>(
@@ -85,8 +89,8 @@ class OpenCourseRequest extends StatelessWidget {
                           onChanged: (value) {},
                         ),
                         const SizedBox(height: 10),
-                        _buildTextField('If Other, Please Explain'),
-                        _buildTextField('Academic Supervisor'),
+                        buildTextField('If Other, Please Explain'),
+                        buildTextField('Academic Supervisor'),
                         const SizedBox(height: 20),
                       ],
                     );
@@ -127,7 +131,7 @@ class OpenCourseRequest extends StatelessWidget {
   }
 
   // Helper function to build text fields
-  Widget _buildTextField(String label) {
+  Widget buildTextField(String label) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10.0),
       child: TextFormField(
@@ -140,7 +144,7 @@ class OpenCourseRequest extends StatelessWidget {
   }
 
   // Helper function to build course input fields
-  Widget _buildCourseFields(String section) {
+  Widget buildCourseFields(String section) {
     return ListView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -148,14 +152,112 @@ class OpenCourseRequest extends StatelessWidget {
       itemBuilder: (context, index) {
         return Column(
           children: [
-            _buildTextField('Course Code'),
-            _buildTextField('Course Name'),
-            _buildTextField('Credit Hours'),
-            _buildTextField('Prerequisite Course'),
+            buildTextField('Course Code'),
+            buildTextField('Course Name'),
+            buildTextField('Credit Hours'),
+            buildTextField('Prerequisite Course'),
             const SizedBox(height: 10),
           ],
         );
       },
+    );
+  }
+
+  Future<void> _generatePdf() async {
+    final pdf = pw.Document();
+
+    // Load the custom Arabic font
+    final fontArabic = await rootBundle.load("fonts/Amiri-Regular.ttf");
+    final ttfArabic = pw.Font.ttf(fontArabic);
+
+    // Add content to the PDF
+    pdf.addPage(
+      pw.Page(
+        build: (pw.Context context) {
+          return pw.Column(
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
+            children: [
+              // Header with Arabic and English text
+              pw.Row(
+                mainAxisAlignment: pw.MainAxisAlignment.center,
+                children: [
+                  pw.Column(
+                    children: [
+                      // Arabic Header using custom font
+                      pw.Text(
+                        'جامعة المنصورة',
+                        style: pw.TextStyle(
+                            fontSize: 16,
+                            fontWeight: pw.FontWeight.bold,
+                            font: ttfArabic),
+                        textDirection: pw.TextDirection.rtl,
+                      ),
+                      pw.Text(
+                        'كلية الهندسة',
+                        style: pw.TextStyle(
+                            fontSize: 16,
+                            fontWeight: pw.FontWeight.bold,
+                            font: ttfArabic),
+                        textDirection: pw.TextDirection.rtl,
+                      ),
+                    ],
+                  ),
+                  pw.SizedBox(width: 10),
+                  pw.Column(
+                    children: [
+                      // English Header
+                      pw.Text('Mansoura University',
+                          style: pw.TextStyle(
+                              fontSize: 16, fontWeight: pw.FontWeight.bold)),
+                      pw.Text('Faculty of Engineering',
+                          style: pw.TextStyle(
+                              fontSize: 16, fontWeight: pw.FontWeight.bold)),
+                    ],
+                  ),
+                ],
+              ),
+              pw.SizedBox(height: 10),
+              pw.Align(
+                alignment: pw.Alignment.center,
+                child: pw.Text(
+                  'نموذج جذف او اضافة اليكتروني',
+                  textDirection: pw.TextDirection.rtl,
+                  style: pw.TextStyle(
+                      fontSize: 18,
+                      fontWeight: pw.FontWeight.bold,
+                      font: ttfArabic),
+                  textAlign: pw.TextAlign.center,
+                ),
+              ),
+              pw.SizedBox(height: 20),
+
+              // Student Information Section
+              pw.Text('Student Information',
+                  style: pw.TextStyle(
+                      fontSize: 18, fontWeight: pw.FontWeight.bold)),
+              pw.SizedBox(height: 10),
+              pw.Text(
+                'Name: [Enter Name]',
+                textDirection: pw.TextDirection.rtl,
+              ),
+              pw.Text(
+                'Student ID: [Enter Student ID]',
+                textDirection: pw.TextDirection.rtl,
+              ),
+              pw.Text(
+                'Phone Number: [Enter Phone Number]',
+                textDirection: pw.TextDirection.rtl,
+              ),
+              // Add more fields here as needed
+            ],
+          );
+        },
+      ),
+    );
+
+    // Display the PDF
+    await Printing.layoutPdf(
+      onLayout: (format) async => pdf.save(),
     );
   }
 }
