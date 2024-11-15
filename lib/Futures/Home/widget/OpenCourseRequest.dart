@@ -23,6 +23,33 @@ class _OpenCourseRequestState extends State<OpenCourseRequest> {
   final TextEditingController completedCreditHoursController =
       TextEditingController();
 
+  // Controllers for course deletion fields
+  final List<TextEditingController> courseCodeControllers = [];
+  final List<TextEditingController> courseNameControllers = [];
+  final List<TextEditingController> workloadBeforeDeletionControllers = [];
+  final List<TextEditingController> workloadAfterDeletionControllers = [];
+  final List<TextEditingController> reasonForDeletionControllers = [];
+  final List<TextEditingController> otherReasonControllers = [];
+  final List<TextEditingController> academicSupervisorControllers = [];
+
+  // Sample count of deletion requests
+  final int deletionRequestCount = 2;
+
+  @override
+  void initState() {
+    super.initState();
+    // Initialize controllers for each deletion request
+    for (int i = 0; i < deletionRequestCount; i++) {
+      courseCodeControllers.add(TextEditingController());
+      courseNameControllers.add(TextEditingController());
+      workloadBeforeDeletionControllers.add(TextEditingController());
+      workloadAfterDeletionControllers.add(TextEditingController());
+      reasonForDeletionControllers.add(TextEditingController());
+      otherReasonControllers.add(TextEditingController());
+      academicSupervisorControllers.add(TextEditingController());
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,30 +90,20 @@ class _OpenCourseRequestState extends State<OpenCourseRequest> {
                     'Completed Credit Hours', completedCreditHoursController),
                 const SizedBox(height: 20),
 
-                // Section: Add Course Requests
+                // Section: Delete Course Requests
                 const Text(
-                  'Add Course Requests',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                ),
-
-                const SizedBox(height: 10),
-                // buildCourseFields('Add Course'),
-                const SizedBox(height: 20),
-
-                // Section: Additional Notes
-                const Text(
-                  'Additional Notes',
+                  'Delete Course Requests',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
                 const SizedBox(height: 10),
-                TextFormField(
-                  maxLines: 4,
-                  decoration: const InputDecoration(
-                    hintText: 'Enter any additional notes here',
-                    border: OutlineInputBorder(),
-                  ),
+                ListView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: deletionRequestCount,
+                  itemBuilder: (context, index) {
+                    return buildCourseDeletionFields(index);
+                  },
                 ),
-
                 const SizedBox(height: 20),
 
                 // Submit Button
@@ -117,6 +134,42 @@ class _OpenCourseRequestState extends State<OpenCourseRequest> {
           border: const OutlineInputBorder(),
         ),
       ),
+    );
+  }
+
+  // Helper function to build deletion fields for each course
+  Widget buildCourseDeletionFields(int index) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        buildTextField('Course Code', courseCodeControllers[index]),
+        buildTextField('Course Name', courseNameControllers[index]),
+        buildTextField('Workload Before Deletion',
+            workloadBeforeDeletionControllers[index]),
+        buildTextField(
+            'Workload After Deletion', workloadAfterDeletionControllers[index]),
+        const Text('Reason for Deletion'),
+        const SizedBox(height: 5),
+        DropdownButtonFormField<String>(
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+          ),
+          items: const [
+            DropdownMenuItem(value: 'Conflict', child: Text('Conflict')),
+            DropdownMenuItem(value: 'Social', child: Text('Social')),
+            DropdownMenuItem(value: 'Other', child: Text('Other')),
+          ],
+          onChanged: (value) {
+            reasonForDeletionControllers[index].text = value ?? '';
+          },
+        ),
+        const SizedBox(height: 10),
+        buildTextField(
+            'If Other, Please Explain', otherReasonControllers[index]),
+        buildTextField(
+            'Academic Supervisor', academicSupervisorControllers[index]),
+        const SizedBox(height: 20),
+      ],
     );
   }
 
@@ -249,6 +302,42 @@ class _OpenCourseRequestState extends State<OpenCourseRequest> {
                     fontSize: 18,
                     fontWeight: pw.FontWeight.bold,
                     font: ttfArabic),
+              ),
+              pw.Divider(
+                indent: 20,
+                endIndent: 50,
+                thickness: 2,
+                height: 2,
+              ),
+
+              pw.Text(
+                'المواد سوف يتم حذفها ',
+                textDirection: pw.TextDirection.rtl,
+                style: pw.TextStyle(
+                    fontSize: 18,
+                    fontWeight: pw.FontWeight.bold,
+                    font: ttfArabic),
+              ),
+              pw.Divider(
+                indent: 20,
+                endIndent: 50,
+                thickness: 2,
+                height: 2,
+              ),
+
+              pw.Text(
+                'المواد سوف يتم اضافتها ',
+                textDirection: pw.TextDirection.rtl,
+                style: pw.TextStyle(
+                    fontSize: 18,
+                    fontWeight: pw.FontWeight.bold,
+                    font: ttfArabic),
+              ),
+              pw.Divider(
+                indent: 20,
+                endIndent: 50,
+                thickness: 2,
+                height: 2,
               ),
 
               // Signature and date section

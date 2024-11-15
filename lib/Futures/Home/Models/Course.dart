@@ -22,19 +22,19 @@ final Map<String, Map<String, List<Course>>> AcadimicCousresData = {
           name: 'Mathematics (1)',
           creditHours: 3,
           professor: 'Dr. Ahmed',
-          prerequisite: ''),
+          prerequisite: 'No Prerequisite  '),
       Course(
           code: 'BAS021',
           name: 'Physics (1)',
           creditHours: 3,
           professor: 'Dr. Sara',
-          prerequisite: ''),
+          prerequisite: 'No Prerequisite'),
       Course(
           code: 'BAS031',
           name: 'Chemistry',
           creditHours: 2,
           professor: 'Dr. Amina',
-          prerequisite: ''),
+          prerequisite: 'No Prerequisite'),
       Course(
           code: 'BAS041',
           name: 'English (1)',
@@ -46,14 +46,14 @@ final Map<String, Map<String, List<Course>>> AcadimicCousresData = {
         name: 'Engineering Drawing',
         creditHours: 2,
         professor: 'Dr. Mona',
-        prerequisite: '',
+        prerequisite: 'No Prerequisite',
       ),
       Course(
           code: 'UNR061',
           name: 'Arabic Language',
           creditHours: 2,
           professor: 'Dr. Hisham',
-          prerequisite: ''),
+          prerequisite: 'No Prerequisite'),
     ],
     'Semester 2': [
       Course(
@@ -61,13 +61,13 @@ final Map<String, Map<String, List<Course>>> AcadimicCousresData = {
           name: 'رياضيات (2)', // Mathematics (2)
           creditHours: 3,
           professor: 'Dr. Ahmed',
-          prerequisite: ''),
+          prerequisite: 'Mathematics (1)'),
       Course(
           code: 'BAS022',
           name: 'ميكانيكا (2)', // Mechanics (2)
           creditHours: 3,
           professor: 'Dr. Sara',
-          prerequisite: ''),
+          prerequisite: 'ميكانيكا (1)'),
       Course(
           code: 'BAS032',
           name: 'فيزياء (2)', // Physics (2)
@@ -92,7 +92,7 @@ final Map<String, Map<String, List<Course>>> AcadimicCousresData = {
           name: 'لغة إنجليزية (2)', // English Language (2)
           creditHours: 2,
           professor: 'Dr. Hisham',
-          prerequisite: '')
+          prerequisite: 'لغة إنجليزية (1)')
     ]
   },
   'Level 100': {
@@ -102,7 +102,7 @@ final Map<String, Map<String, List<Course>>> AcadimicCousresData = {
           name: 'رياضيات (3)', // Mathematics (2)
           creditHours: 3,
           professor: 'Dr. Ahmed',
-          prerequisite: ''),
+          prerequisite: 'رياضيات (2)'),
       Course(
           code: 'UNR 061',
           name: 'كتابة التقارير الفنية', // Technical Report Writing
@@ -121,19 +121,19 @@ final Map<String, Map<String, List<Course>>> AcadimicCousresData = {
           name: 'دوائر كهربية', // Electric Circuits
           creditHours: 3,
           professor: 'Dr. Khalid',
-          prerequisite: ''),
+          prerequisite: 'فيزياء (2)'),
       Course(
           code: 'CSE 042',
           name: 'تصميم رقمي (1)', // Digital Design (1)
           creditHours: 3,
           professor: 'Dr. Mona',
-          prerequisite: ''),
+          prerequisite: 'مقدمة في نظم الحاسب'),
       Course(
           code: 'BAS 031',
           name: 'الكترونيات الجوامد', // Solid State Electronics
           creditHours: 3,
           professor: 'Dr. Hisham',
-          prerequisite: '')
+          prerequisite: 'فيزياء ( 2)')
     ],
     'Semester 2': [
       Course(
@@ -141,38 +141,38 @@ final Map<String, Map<String, List<Course>>> AcadimicCousresData = {
           name: 'رياضيات (4)', // Mathematics (4)
           creditHours: 3,
           professor: 'Dr. Ahmed',
-          prerequisite: ''),
+          prerequisite: 'رياضيات (3)'),
       Course(
           code: 'BAS 115',
           name:
               'نظرية الاحتمالات والإحصاء', // Probability and Statistics Theory
           creditHours: 3,
           professor: 'Dr. Sara',
-          prerequisite: ''),
+          prerequisite: 'رياضيات (2)'),
       Course(
           code: 'CSE 112',
           name: 'خوارزميات و هياكل بيانات', // Algorithms and Data Structures
           creditHours: 3,
           professor: 'Dr. Amina',
-          prerequisite: ''),
+          prerequisite: 'مقدمة في نظم الحاسب'),
       Course(
           code: 'ECE 131',
           name: 'إشارات ومنظومات', // Signals and Systems
           creditHours: 3,
           professor: 'Dr. Khalid',
-          prerequisite: ''),
+          prerequisite: 'رياضيات (3)'),
       Course(
           code: 'ECE 123',
           name: 'قوى والات كهربية', // Electrical Power and Machines
           creditHours: 3,
           professor: 'Dr. Mona',
-          prerequisite: ''),
+          prerequisite: 'دوائر كهربية'),
       Course(
           code: 'ELE 151',
-          name: 'دوائر إلكترونية رقمية', // Digital Electronic Circuits
+          name: ' اساسيات إلكترونية  ', // Digital Electronic Circuits
           creditHours: 3,
           professor: 'Dr. Hisham',
-          prerequisite: '')
+          prerequisite: ' اليكترونيات الجوامد - دوائر كهربية')
     ]
   },
   'Level 200': {
@@ -182,25 +182,25 @@ final Map<String, Map<String, List<Course>>> AcadimicCousresData = {
           name: 'رياضيات (5)', // Mathematics (5)
           creditHours: 3,
           professor: 'Dr. Ahmed',
-          prerequisite: ''),
+          prerequisite: 'رياضيات 3'),
       Course(
           code: 'CSE 141',
           name: 'تصميم رقمي (2)', // Digital Design (2)
           creditHours: 3,
           professor: 'Dr. Sara',
-          prerequisite: ''),
+          prerequisite: 'تصميم رقمي (1)'),
       Course(
           code: 'CSE 112',
           name: 'أنظمة قواعد البيانات', // Database Systems
           creditHours: 3,
           professor: 'Dr. Amina',
-          prerequisite: ''),
+          prerequisite: ' مقدمة لنظم الحاسب الالي - خورازميات وهياكل بيانات'),
       Course(
           code: 'ECE 131',
           name: 'معالجة الإشارات الرقمية', // Digital Signal Processing
           creditHours: 3,
           professor: 'Dr. Khalid',
-          prerequisite: ''),
+          prerequisite: 'اشارات ومنظومات'),
       Course(
           code: 'UNR 241',
           name:
@@ -212,28 +212,28 @@ final Map<String, Map<String, List<Course>>> AcadimicCousresData = {
     'Semester 2': [
       Course(
           code: 'CSE 221',
-          name: 'تصميم معماري للحاسب (1)', // Computer Architecture Design (1)
+          name: 'نظم الاتصالات التماثلية', // Computer Architecture Design (1)
           creditHours: 3,
           professor: 'Dr. Ahmed',
-          prerequisite: ''),
+          prerequisite: 'اشارات ومنظومات'),
       Course(
           code: 'CSE 213',
           name: 'معمارية الحاسب', // Computer Architecture
           creditHours: 3,
           professor: 'Dr. Sara',
-          prerequisite: ''),
+          prerequisite: 'تصميم رقمي 2'),
       Course(
           code: 'ECE 232',
-          name: 'ميكانيكا الكم', // Quantum Mechanics
+          name: ' تحكم', // Quantum Mechanics
           creditHours: 3,
           professor: 'Dr. Amina',
-          prerequisite: ''),
+          prerequisite: 'رياضيات 3'),
       Course(
           code: 'ECE 221',
-          name: 'دوائر منطقية رقمية', // Digital Logic Circuits
+          name: 'دوائر اليكترونية ', // Digital Logic Circuits
           creditHours: 3,
           professor: 'Dr. Khalid',
-          prerequisite: ''),
+          prerequisite: 'اساسيات اليكترونية'),
       Course(
           code: 'UNR 281',
           name: 'القانون وحقوق الإنسان', // Law and Human Rights
@@ -255,63 +255,63 @@ final Map<String, Map<String, List<Course>>> AcadimicCousresData = {
           name: 'نظم التشغيل', // Operating Systems
           creditHours: 3,
           professor: 'Dr. Ahmed',
-          prerequisite: ''),
+          prerequisite: 'تصميم رقمي 2'),
       Course(
           code: 'ECE 331',
           name: 'نظم الاتصالات الرقمية', // Digital Communication Systems
           creditHours: 3,
           professor: 'Dr. Sara',
-          prerequisite: ''),
+          prerequisite: 'نظم الاتصالات التماثلية'),
       Course(
           code: 'CSE 313',
-          name: 'معماريات الحاسب الدقيقة', // Microprocessor Architectures
+          name: ' معالجات الدقيقة', // Microprocessor Architectures
           creditHours: 3,
           professor: 'Dr. Amina',
-          prerequisite: ''),
+          prerequisite: 'معمار الحاسب '),
       Course(
           code: 'ECE 341',
           name: 'مجالات كهرومغناطيسية', // Electromagnetic Fields
           creditHours: 3,
           professor: 'Dr. Khalid',
-          prerequisite: ''),
+          prerequisite: 'رياضيات 3- دوائر كهربية'),
       Course(
           code: 'CSE 312',
-          name: 'قواعد البيانات', // Databases
+          name: ' شبكات الحاسب', // Databases
           creditHours: 3,
           professor: 'Dr. Mona',
-          prerequisite: '')
+          prerequisite: 'مقدمة لنظم الحاسب')
     ],
     'Semester 2': [
       Course(
           code: 'ECE 342',
-          name: 'الموجات والدوائر', // Waves and Circuits
+          name: 'المرشدات الهوائيات', // Waves and Circuits
           creditHours: 3,
           professor: 'Dr. Ahmed',
-          prerequisite: ''),
+          prerequisite: 'مجالات كهرومغناطيسية'),
       Course(
           code: 'Elective',
-          name: 'مقرر اختياري (2)', // Elective Course (2)
+          name: 'مقرر اختياري (1)', // Elective Course (2)
           creditHours: 3,
           professor: 'Dr. Sara',
           prerequisite: ''),
       Course(
           code: 'Elective',
-          name: 'مقرر اختياري (3)', // Elective Course (3)
+          name: 'مقرر اختياري (2)', // Elective Course (3)
           creditHours: 3,
           professor: 'Dr. Amina',
           prerequisite: ''),
       Course(
           code: 'CSE 315',
-          name: 'النظريات الاحتمالية', // Probability Theory
+          name: 'الانظمة المتضمنة', // Probability Theory
           creditHours: 3,
           professor: 'Dr. Khalid',
-          prerequisite: ''),
+          prerequisite: 'معمار الحاسب'),
       Course(
           code: 'CSE 314',
           name: 'رسوم بالحاسب', // Computer Graphics
           creditHours: 3,
           professor: 'Dr. Mona',
-          prerequisite: ''),
+          prerequisite: 'مقدمة لنظم الحاسب'),
       Course(
           code: 'CCE 371',
           name: 'التدريب الميداني (2)', // Field Training (2)
@@ -333,16 +333,16 @@ final Map<String, Map<String, List<Course>>> AcadimicCousresData = {
           name: 'اتصالات المحمول', // Mobile Communications
           creditHours: 3,
           professor: 'Dr. Sara',
-          prerequisite: ''),
+          prerequisite: 'نظم الاتصالات الرقمية'),
       Course(
           code: 'Elective',
-          name: 'مقرر اختياري (7)', // Elective Course (7)
+          name: 'مقرر اختياري (3)', // Elective Course (7)
           creditHours: 3,
           professor: 'Dr. Amina',
           prerequisite: ''),
       Course(
           code: 'Elective',
-          name: 'مقرر اختياري (8)', // Elective Course (8)
+          name: 'مقرر اختياري (4)', // Elective Course (8)
           creditHours: 3,
           professor: 'Dr. Khalid',
           prerequisite: ''),
@@ -351,7 +351,7 @@ final Map<String, Map<String, List<Course>>> AcadimicCousresData = {
           name: 'تقنيات البرمجة المتقدمة', // Advanced Programming Techniques
           creditHours: 3,
           professor: 'Dr. Mona',
-          prerequisite: ''),
+          prerequisite: 'مقدمة في نظم الحاسب'),
       Course(
           code: 'UNR 461',
           name: 'آداب واخلاقيات المهنة', // Ethics and Professionalism
@@ -386,19 +386,19 @@ final Map<String, Map<String, List<Course>>> AcadimicCousresData = {
           prerequisite: ''),
       Course(
           code: 'CSE 421',
-          name: 'الشبكات الحاسوبية', // Computer Networks
+          name: ' التحكم المنطقي المبرمج', // Computer Networks
           creditHours: 3,
           professor: 'Dr. Khalid',
-          prerequisite: ''),
+          prerequisite: 'تحكم 1'),
       Course(
           code: 'CSE 422',
-          name: 'الأنظمة الذكية', // Intelligent Systems
+          name: ' الذكاء الاصطناعي', // Intelligent Systems
           creditHours: 3,
           professor: 'Dr. Mona',
-          prerequisite: ''),
+          prerequisite: 'خوارزمية  وهياكل البيانات'),
       Course(
           code: 'UNR 471',
-          name: 'القانون وحقوق الملكية الفكرية', // Intellectual Property Law
+          name: 'التسويق', // Intellectual Property Law
           creditHours: 3,
           professor: 'Dr. Hisham',
           prerequisite: '')

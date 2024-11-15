@@ -45,36 +45,58 @@ class CourseListTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(12.0), // Add padding to the container
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8.0), // Add rounded corners
-        border: Border.all(color: Colors.grey, width: 1.0), // Add a border
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: Text(
-              course.name,
-              style:
-                  const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+    return InkWell(
+      onTap: () {
+        // Show prerequisite details when the tile is tapped
+        showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+            title: Text(course.name),
+            content: Text(
+              course.prerequisite.isEmpty
+                  ? 'No prerequisite required.'
+                  : 'Prerequisite: ${course.prerequisite}',
             ),
-          ),
-          const SizedBox(width: 10.0), // Add spacing between elements
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              Text(
-                '${course.code} | Credits: ${course.creditHours}',
-                style: const TextStyle(fontSize: 12.0),
-              ),
-              Text(
-                course.professor,
-                style: TextStyle(fontSize: 12.0, color: Colors.grey[600]),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('Close'),
               ),
             ],
           ),
-        ],
+        );
+      },
+      child: Container(
+        padding: const EdgeInsets.all(12.0), // Add padding to the container
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8.0), // Add rounded corners
+          border: Border.all(color: Colors.grey, width: 1.0), // Add a border
+        ),
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                course.name,
+                style: const TextStyle(
+                    fontSize: 16.0, fontWeight: FontWeight.bold),
+              ),
+            ),
+            const SizedBox(width: 10.0), // Add spacing between elements
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Text(
+                  '${course.code} | Credits: ${course.creditHours}',
+                  style: const TextStyle(fontSize: 12.0),
+                ),
+                Text(
+                  course.professor,
+                  style: TextStyle(fontSize: 12.0, color: Colors.grey[600]),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
     );
   }
