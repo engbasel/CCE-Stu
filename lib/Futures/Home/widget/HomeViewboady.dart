@@ -31,7 +31,9 @@ class HomeViewboady extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Greeting Section
-          const GreetingSection(),
+          GreetingSection(
+            studentName: 'basel Embaby',
+          ),
           const SizedBox(height: 16.0),
 
           // Notifications Section - New Feature
