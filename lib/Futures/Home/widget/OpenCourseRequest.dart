@@ -3,8 +3,25 @@ import 'package:flutter/services.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:printing/printing.dart';
 
-class OpenCourseRequest extends StatelessWidget {
+class OpenCourseRequest extends StatefulWidget {
   const OpenCourseRequest({Key? key}) : super(key: key);
+
+  @override
+  _OpenCourseRequestState createState() => _OpenCourseRequestState();
+}
+
+class _OpenCourseRequestState extends State<OpenCourseRequest> {
+  // Controllers for each form field
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController studentIdController = TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
+  final TextEditingController studyLevelController = TextEditingController();
+  final TextEditingController programController = TextEditingController();
+  final TextEditingController academicYearController = TextEditingController();
+  final TextEditingController semesterGpaController = TextEditingController();
+  final TextEditingController cumulativeGpaController = TextEditingController();
+  final TextEditingController completedCreditHoursController =
+      TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +31,7 @@ class OpenCourseRequest extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () async {
-              // Generate and print the PDF
+              // Generate and print the PDF with form data
               await _generatePdf();
             },
             icon: const Icon(Icons.print),
@@ -29,21 +46,21 @@ class OpenCourseRequest extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Section: Student Information
                 const Text(
                   'Student Information',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
                 const SizedBox(height: 10),
-                buildTextField('Name'),
-                buildTextField('Student ID'),
-                buildTextField('Phone Number'),
-                buildTextField('Study Level'),
-                buildTextField('Program (e.g., CCE)'),
-                buildTextField('Academic Year'),
-                buildTextField('Semester GPA'),
-                buildTextField('Cumulative GPA'),
-                buildTextField('Completed Credit Hours'),
+                buildTextField('Name', nameController),
+                buildTextField('Student ID', studentIdController),
+                buildTextField('Phone Number', phoneNumberController),
+                buildTextField('Study Level', studyLevelController),
+                buildTextField('Program (e.g., CCE)', programController),
+                buildTextField('Academic Year', academicYearController),
+                buildTextField('Semester GPA', semesterGpaController),
+                buildTextField('Cumulative GPA', cumulativeGpaController),
+                buildTextField(
+                    'Completed Credit Hours', completedCreditHoursController),
                 const SizedBox(height: 20),
 
                 // Section: Add Course Requests
@@ -51,51 +68,10 @@ class OpenCourseRequest extends StatelessWidget {
                   'Add Course Requests',
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
-                const SizedBox(height: 10),
-                buildCourseFields('Add Course'),
-                const SizedBox(height: 20),
 
-                // Section: Delete Course Requests
-                const Text(
-                  'Delete Course Requests',
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-                ),
                 const SizedBox(height: 10),
-                ListView.builder(
-                  shrinkWrap: true,
-                  physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 2, // Adjust for the number of deletions
-                  itemBuilder: (context, index) {
-                    return Column(
-                      children: [
-                        buildTextField('Course Code'),
-                        buildTextField('Course Name'),
-                        buildTextField('Workload Before Deletion'),
-                        buildTextField('Workload After Deletion'),
-                        const Text('Reason for Deletion'),
-                        const SizedBox(height: 5),
-                        DropdownButtonFormField<String>(
-                          decoration: const InputDecoration(
-                            border: OutlineInputBorder(),
-                          ),
-                          items: const [
-                            DropdownMenuItem(
-                                value: 'Conflict', child: Text('Conflict')),
-                            DropdownMenuItem(
-                                value: 'Social', child: Text('Social')),
-                            DropdownMenuItem(
-                                value: 'Other', child: Text('Other')),
-                          ],
-                          onChanged: (value) {},
-                        ),
-                        const SizedBox(height: 10),
-                        buildTextField('If Other, Please Explain'),
-                        buildTextField('Academic Supervisor'),
-                        const SizedBox(height: 20),
-                      ],
-                    );
-                  },
-                ),
+                // buildCourseFields('Add Course'),
+                const SizedBox(height: 20),
 
                 // Section: Additional Notes
                 const Text(
@@ -131,35 +107,16 @@ class OpenCourseRequest extends StatelessWidget {
   }
 
   // Helper function to build text fields
-  Widget buildTextField(String label) {
+  Widget buildTextField(String label, TextEditingController controller) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10.0),
       child: TextFormField(
+        controller: controller,
         decoration: InputDecoration(
           labelText: label,
           border: const OutlineInputBorder(),
         ),
       ),
-    );
-  }
-
-  // Helper function to build course input fields
-  Widget buildCourseFields(String section) {
-    return ListView.builder(
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      itemCount: 2, // Adjust for the number of additions
-      itemBuilder: (context, index) {
-        return Column(
-          children: [
-            buildTextField('Course Code'),
-            buildTextField('Course Name'),
-            buildTextField('Credit Hours'),
-            buildTextField('Prerequisite Course'),
-            const SizedBox(height: 10),
-          ],
-        );
-      },
     );
   }
 
@@ -170,42 +127,40 @@ class OpenCourseRequest extends StatelessWidget {
     final fontArabic = await rootBundle.load("fonts/Amiri-Regular.ttf");
     final ttfArabic = pw.Font.ttf(fontArabic);
 
-    // Add content to the PDF
     pdf.addPage(
       pw.Page(
         build: (pw.Context context) {
           return pw.Column(
-            crossAxisAlignment: pw.CrossAxisAlignment.start,
+            crossAxisAlignment: pw.CrossAxisAlignment.stretch,
             children: [
               // Header with Arabic and English text
               pw.Row(
+                crossAxisAlignment: pw.CrossAxisAlignment.center,
                 mainAxisAlignment: pw.MainAxisAlignment.center,
                 children: [
                   pw.Column(
+                    crossAxisAlignment: pw.CrossAxisAlignment.center,
+                    mainAxisAlignment: pw.MainAxisAlignment.center,
                     children: [
-                      // Arabic Header using custom font
-                      pw.Text(
-                        'جامعة المنصورة',
-                        style: pw.TextStyle(
-                            fontSize: 16,
-                            fontWeight: pw.FontWeight.bold,
-                            font: ttfArabic),
-                        textDirection: pw.TextDirection.rtl,
-                      ),
-                      pw.Text(
-                        'كلية الهندسة',
-                        style: pw.TextStyle(
-                            fontSize: 16,
-                            fontWeight: pw.FontWeight.bold,
-                            font: ttfArabic),
-                        textDirection: pw.TextDirection.rtl,
-                      ),
+                      pw.Text('جامعة المنصورة',
+                          style: pw.TextStyle(
+                              fontSize: 16,
+                              fontWeight: pw.FontWeight.bold,
+                              font: ttfArabic),
+                          textDirection: pw.TextDirection.rtl),
+                      pw.Text('كلية الهندسة',
+                          style: pw.TextStyle(
+                              fontSize: 16,
+                              fontWeight: pw.FontWeight.bold,
+                              font: ttfArabic),
+                          textDirection: pw.TextDirection.rtl),
                     ],
                   ),
                   pw.SizedBox(width: 10),
                   pw.Column(
+                    crossAxisAlignment: pw.CrossAxisAlignment.center,
+                    mainAxisAlignment: pw.MainAxisAlignment.center,
                     children: [
-                      // English Header
                       pw.Text('Mansoura University',
                           style: pw.TextStyle(
                               fontSize: 16, fontWeight: pw.FontWeight.bold)),
@@ -217,38 +172,170 @@ class OpenCourseRequest extends StatelessWidget {
                 ],
               ),
               pw.SizedBox(height: 10),
-              pw.Align(
-                alignment: pw.Alignment.center,
+              pw.Divider(
+                indent: 20,
+                endIndent: 50,
+                thickness: 2,
+                height: 2,
+              ),
+              pw.SizedBox(height: 10),
+
+              pw.Center(
                 child: pw.Text(
-                  'نموذج جذف او اضافة اليكتروني',
+                  'نموذج حذف أو إضافة إلكتروني',
                   textDirection: pw.TextDirection.rtl,
                   style: pw.TextStyle(
                       fontSize: 18,
                       fontWeight: pw.FontWeight.bold,
                       font: ttfArabic),
-                  textAlign: pw.TextAlign.center,
                 ),
               ),
               pw.SizedBox(height: 20),
 
-              // Student Information Section
-              pw.Text('Student Information',
-                  style: pw.TextStyle(
-                      fontSize: 18, fontWeight: pw.FontWeight.bold)),
+              pw.Directionality(
+                textDirection: pw.TextDirection.rtl,
+                child: pw.Table.fromTextArray(
+                  headers: [
+                    'اسم الطالب',
+                    'الرقم الجامعي',
+                    'المستوى الدراسي',
+                    'البرنامج',
+                    'العام الأكاديمي'
+                  ],
+                  data: [
+                    [
+                      nameController.text,
+                      studentIdController.text,
+                      studyLevelController.text,
+                      programController.text,
+                      academicYearController.text
+                    ],
+                  ],
+                  border: pw.TableBorder.all(),
+                  cellStyle: pw.TextStyle(
+                    fontSize: 14,
+                    font: ttfArabic,
+                  ),
+                  headerStyle: pw.TextStyle(
+                    fontSize: 16,
+                    fontWeight: pw.FontWeight.bold,
+                    font: ttfArabic,
+                  ),
+                  headerDecoration: pw.BoxDecoration(),
+                  cellAlignment: pw.Alignment.center,
+                ),
+              ),
               pw.SizedBox(height: 10),
               pw.Text(
-                'Name: [Enter Name]',
+                'معدل الفصل الدراسي: ${semesterGpaController.text}',
                 textDirection: pw.TextDirection.rtl,
+                style: pw.TextStyle(
+                    fontSize: 18,
+                    fontWeight: pw.FontWeight.bold,
+                    font: ttfArabic),
               ),
               pw.Text(
-                'Student ID: [Enter Student ID]',
+                'المعدل التراكمي: ${cumulativeGpaController.text}',
                 textDirection: pw.TextDirection.rtl,
+                style: pw.TextStyle(
+                    fontSize: 18,
+                    fontWeight: pw.FontWeight.bold,
+                    font: ttfArabic),
               ),
               pw.Text(
-                'Phone Number: [Enter Phone Number]',
+                'عدد الساعات المكتملة: ${completedCreditHoursController.text}',
+                textDirection: pw.TextDirection.rtl,
+                style: pw.TextStyle(
+                    fontSize: 18,
+                    fontWeight: pw.FontWeight.bold,
+                    font: ttfArabic),
+              ),
+
+              // Signature and date section
+              pw.SizedBox(height: 20),
+              pw.Row(
+                mainAxisAlignment: pw.MainAxisAlignment.spaceAround,
+                children: [
+                  pw.Column(
+                    children: [
+                      // pw.Text('',
+                      //     style: pw.TextStyle(fontSize: 14, font: ttfArabic)),
+                      pw.Text(
+                        'توقيع الطالب',
+                        textDirection: pw.TextDirection.rtl,
+                        style: pw.TextStyle(
+                            fontSize: 18,
+                            fontWeight: pw.FontWeight.bold,
+                            font: ttfArabic),
+                      ),
+                      pw.Container(
+                          height: 30,
+                          width: 100,
+                          decoration:
+                              pw.BoxDecoration(border: pw.Border.all())),
+                    ],
+                  ),
+                  pw.Column(
+                    children: [
+                      // pw.Text('',
+                      //     style: pw.TextStyle(fontSize: 14, font: ttfArabic)),
+
+                      pw.Text(
+                        'توقيع المرشد الأكاديمي',
+                        textDirection: pw.TextDirection.rtl,
+                        style: pw.TextStyle(
+                            fontSize: 18,
+                            fontWeight: pw.FontWeight.bold,
+                            font: ttfArabic),
+                      ),
+                      pw.Container(
+                          height: 30,
+                          width: 100,
+                          decoration:
+                              pw.BoxDecoration(border: pw.Border.all())),
+                    ],
+                  ),
+                  pw.Column(
+                    children: [
+                      // pw.Text('ج',
+                      //     style: pw.TextStyle(fontSize: 14, font: ttfArabic)),
+
+                      pw.Text(
+                        'توقيع المدير التنفيذي للبرنامج ',
+                        textDirection: pw.TextDirection.rtl,
+                        style: pw.TextStyle(
+                            fontSize: 18,
+                            fontWeight: pw.FontWeight.bold,
+                            font: ttfArabic),
+                      ),
+                      pw.Container(
+                          height: 30,
+                          width: 100,
+                          decoration:
+                              pw.BoxDecoration(border: pw.Border.all())),
+                    ],
+                  ),
+                ],
+              ),
+              pw.SizedBox(height: 10),
+              pw.Align(
+                alignment: pw.Alignment.centerRight,
+                child: pw.Text(
+                  'اليوم والتاريخ:',
+                  style: pw.TextStyle(fontSize: 14, font: ttfArabic),
+                  textDirection: pw.TextDirection.rtl,
+                ),
+              ),
+              pw.Divider(),
+              pw.Text(
+                textAlign: pw.TextAlign.center,
+                ' '
+                ' يجب اتباع المواد الخاصة بالتسجيل والحذف والاضافة والانسحاب المنصوص عليها بالقواعد العامة في اللائحة الموحدة لبرامج البكالريوس بنظام الساعات المعتمدة - كلية الهندسة - جامعة المنصورة '
+                '',
+                style: pw.TextStyle(fontSize: 18, font: ttfArabic),
                 textDirection: pw.TextDirection.rtl,
               ),
-              // Add more fields here as needed
+              pw.Divider(),
             ],
           );
         },
