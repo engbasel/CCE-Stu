@@ -1,6 +1,7 @@
 import 'package:cce_app/Futures/Home/widget/OpenCourseRequest.dart';
 import 'package:cce_app/Futures/Home/widget/StudyMaterialview.dart';
 import 'package:cce_app/Futures/Home/widget/buildLevelSection.dart';
+import 'package:cce_app/Futures/Settings/view/SettingsView.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -73,7 +74,11 @@ class CustomDrawer extends StatelessWidget {
             leading: const Icon(Icons.settings),
             title: const Text('Settings'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return SettingsView();
+                },
+              ));
             },
           ),
           const Divider(),
