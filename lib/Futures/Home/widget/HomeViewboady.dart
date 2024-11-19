@@ -1,4 +1,5 @@
 import 'package:cce_app/Core/widgets/GPAProgressWidget.dart';
+import 'package:cce_app/Futures/Home/Models/Course.dart';
 import 'package:cce_app/Futures/Home/widget/AnnouncementsSection.dart';
 import 'package:cce_app/Futures/Home/widget/CoursesSection.dart';
 import 'package:cce_app/Futures/Home/widget/DeadlinesSection.dart';
@@ -25,7 +26,36 @@ class HomeViewboady extends StatelessWidget {
     // Credits progress calculations
     double creditsProgress = completedCredits / totalCredits;
     int creditsPercentage = (creditsProgress * 100).toInt();
-
+    final courses = [
+      Course(
+        code: 'CS101',
+        name: 'Data Structures',
+        creditHours: 3,
+        professor: 'Dr. Ahmed',
+        prerequisite: 'Introduction to Programming',
+      ),
+      Course(
+        code: 'CS102',
+        name: 'Algorithms',
+        creditHours: 4,
+        professor: 'Dr. Sara',
+        prerequisite: 'Data Structures',
+      ),
+      Course(
+        code: 'MATH201',
+        name: 'Discrete Math',
+        creditHours: 3,
+        professor: 'Dr. Amina',
+        prerequisite: 'Calculus I',
+      ),
+      Course(
+        code: 'MATH201',
+        name: 'Discrete Math',
+        creditHours: 3,
+        professor: 'Dr. Amina',
+        prerequisite: 'Calculus I',
+      ),
+    ];
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -74,7 +104,7 @@ class HomeViewboady extends StatelessWidget {
           const SizedBox(height: 16.0),
 
           // Courses Section
-          const CoursesSection(),
+          CoursesSection(courses: courses),
           const SizedBox(height: 16.0),
 
           // Study Resources Section
