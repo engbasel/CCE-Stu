@@ -1,4 +1,5 @@
 import 'package:cce_app/Futures/Home/widget/OpenCourseRequest.dart';
+import 'package:cce_app/Futures/Home/widget/StudyMaterialview.dart';
 import 'package:cce_app/Futures/Home/widget/buildLevelSection.dart';
 import 'package:flutter/material.dart';
 
@@ -40,7 +41,11 @@ class CustomDrawer extends StatelessWidget {
             leading: const Icon(Icons.book),
             title: const Text('Study Materials'),
             onTap: () {
-              Navigator.pop(context);
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return const StudyMaterial();
+                },
+              ));
             },
           ),
           ListTile(
