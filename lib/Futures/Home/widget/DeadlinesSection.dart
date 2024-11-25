@@ -20,7 +20,7 @@ class DeadlinesSection extends StatelessWidget {
           leading: Icon(Icons.assignment),
         ),
         ListTile(
-          title: Text('Final Exam - Nov 22'),
+          title: Text('CAT Reloaded - Nov 22'),
           leading: Icon(Icons.access_alarm),
         ),
       ],
