@@ -13,6 +13,26 @@ class CommonNewsSection extends StatelessWidget {
         'content': 'Join the AI workshop in Hall A.'
       },
       {
+        'title': 'University Workshop',
+        'date': '2024-12-01',
+        'content': 'Join the AI workshop in Hall A.'
+      },
+      {
+        'title': 'University Workshop',
+        'date': '2024-12-01',
+        'content': 'Join the AI workshop in Hall A.'
+      },
+      {
+        'title': 'University Workshop',
+        'date': '2024-12-01',
+        'content': 'Join the AI workshop in Hall A.'
+      },
+      {
+        'title': 'University Workshop',
+        'date': '2024-12-01',
+        'content': 'Join the AI workshop in Hall A.'
+      },
+      {
         'title': 'Holiday Announcement',
         'date': '2024-12-15',
         'content': 'University closed for winter break.'

@@ -7,9 +7,12 @@ class PopularProfessorsSection extends StatelessWidget {
   Widget build(BuildContext context) {
     // Mock data for popular professors
     final professorsList = [
-      {'name': 'Dr. Ahmed Zaki', 'subject': 'Data Structures', 'rating': 4.8},
-      {'name': 'Dr. Sara Tarek', 'subject': 'Algorithms', 'rating': 4.7},
-      {'name': 'Dr. Amina Said', 'subject': 'Discrete Math', 'rating': 4.9},
+      {'name': 'Dr. Ahmed Saleh', 'subject': 'Data Structures', 'rating': 4.8},
+      {'name': 'Dr. Sara Ayad', 'subject': 'Algorithms', 'rating': 4.7},
+      {'name': 'Dr. Sara Ayad', 'subject': 'Algorithms', 'rating': 4.7},
+      {'name': 'Dr. Sara Ayad', 'subject': 'Algorithms', 'rating': 4.7},
+      {'name': 'Dr. Sara Ayad', 'subject': 'Algorithms', 'rating': 4.7},
+      {'name': 'Dr. Ahemd Shaban', 'subject': 'Discrete Math', 'rating': 4.9},
     ];
 
     return Column(

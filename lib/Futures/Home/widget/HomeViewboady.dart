@@ -59,27 +59,38 @@ class HomeViewboady extends StatelessWidget {
           const NotificationsSection(),
           const SizedBox(height: 16.0),
 
-          // Announcements Section
+          //----------------------------- Announcements Section -----------------------------
           const AnnouncementsSection(),
+          //----------------------------- Announcements Section -----------------------------
+
           const SizedBox(height: 16.0),
 
-          // Deadlines Section
+          //----------------------------- Deadlines Section -----------------------------
           const DeadlinesSection(),
-          const SizedBox(height: 16.0),
+          //----------------------------- Deadlines Section -----------------------------
 
+          const SizedBox(height: 16.0),
+          // ---------------------------------- Common News Section -----------------------------
           CommonNewsSection(),
-
+          // ---------------------------------- Common News Section -----------------------------
+          // ---------------------------------- Popular Professors Section ----------------------
           PopularProfessorsSection(),
-          // Courses Section
+          // ---------------------------------- Popular Professors Section ----------------------
+          // ---------------------------------- Courses Section ---------------------------------
           CoursesSection(courses: courses),
+          // ---------------------------------- Courses Section ---------------------------------
+
           const SizedBox(height: 16.0),
 
-          // Study Resources Section
+          //  ---------------------------------- Study Resources Section ------------------------
           const StudyResourcesSection(),
+          //  ---------------------------------- Study Resources Section ------------------------
+
           const SizedBox(height: 16.0),
 
-          // Notes Section
+          //---------------------------------- Notes Section ----------------------------------
           const NotesSection(),
+          //---------------------------------- Notes Section ----------------------------------
         ],
       ),
     );
