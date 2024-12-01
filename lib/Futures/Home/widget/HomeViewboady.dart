@@ -1,5 +1,4 @@
 import 'package:cce_app/Futures/Home/Models/Course.dart';
-import 'package:cce_app/Futures/Home/widget/AnnouncementsSection.dart';
 import 'package:cce_app/Futures/Home/widget/CommonNewsSection.dart';
 import 'package:cce_app/Futures/Home/widget/CoursesSection.dart';
 import 'package:cce_app/Futures/Home/widget/DeadlinesSection.dart';
@@ -60,22 +59,24 @@ class HomeViewboady extends StatelessWidget {
           const SizedBox(height: 16.0),
 
           //----------------------------- Announcements Section -----------------------------
-          const AnnouncementsSection(),
+          // const AnnouncementsSection(),
           //----------------------------- Announcements Section -----------------------------
 
           const SizedBox(height: 16.0),
 
           //----------------------------- Deadlines Section -----------------------------
-          const DeadlinesSection(),
+          const EventsandDeadlinesSection(),
           //----------------------------- Deadlines Section -----------------------------
 
           const SizedBox(height: 16.0),
           // ---------------------------------- Common News Section -----------------------------
           CommonNewsSection(),
           // ---------------------------------- Common News Section -----------------------------
+
           // ---------------------------------- Popular Professors Section ----------------------
           PopularProfessorsSection(),
           // ---------------------------------- Popular Professors Section ----------------------
+
           // ---------------------------------- Courses Section ---------------------------------
           CoursesSection(courses: courses),
           // ---------------------------------- Courses Section ---------------------------------
