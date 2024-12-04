@@ -1,3 +1,4 @@
+import 'package:cce_app/Futures/Home/view/homeviwe.dart';
 import 'package:cce_app/Futures/auth/Login/views/loginviwe.dart';
 import 'package:cce_app/router.dart';
 import 'package:flutter/material.dart';
@@ -34,7 +35,7 @@ class CCE_APP extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const LoginView(), // Start with SplashView
+      home: const HomeView(), // Start with SplashView
     );
   }
 }
