@@ -3,6 +3,7 @@ import 'package:cce_app/Futures/auth/Login/views/loginviwe.dart';
 import 'package:cce_app/router.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'firebase_options.dart'; // Automatically generated for your project
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'generated/l10n.dart';
@@ -32,10 +33,29 @@ class CCE_APP extends StatelessWidget {
       supportedLocales: S.delegate.supportedLocales,
       onGenerateRoute: onGenerateRoute,
       theme: ThemeData(
+        textTheme: GoogleFonts.interTightTextTheme(),
+        inputDecorationTheme: InputDecorationTheme(
+          filled: true,
+          fillColor:Colors.white,
+          enabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(22),
+              borderSide: BorderSide(
+                  color: Colors.grey.shade400,
+                  width: 0.5
+              )
+          ),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(22),
+
+
+          )
+
+        ),
+        scaffoldBackgroundColor: Colors.white,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomeView(), // Start with SplashView
+      home: const LoginView(), // Start with SplashView
     );
   }
 }
