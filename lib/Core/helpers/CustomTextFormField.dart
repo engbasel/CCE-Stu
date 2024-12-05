@@ -24,9 +24,8 @@ class CustomTextFormField extends StatelessWidget {
       obscureText: isPasswordField && !isPasswordVisible,
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: const TextStyle(color: Colors.grey),
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        hintStyle: const TextStyle(color: Colors.grey,fontSize: 13),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
         suffixIcon: isPasswordField
             ? IconButton(
                 icon: Icon(
