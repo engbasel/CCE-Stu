@@ -14,6 +14,8 @@ const kTextStyle15 = TextStyle(
 );
 const kTextStyle11grey = TextStyle(
   fontSize: 11.5,
+  fontWeight: FontWeight.w500,
+
   color: Colors.grey,
 
 );
