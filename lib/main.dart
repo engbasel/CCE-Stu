@@ -1,3 +1,4 @@
+import 'package:cce_app/Core/manager/ColorsManager.dart';
 import 'package:cce_app/Futures/Home/view/homeviwe.dart';
 import 'package:cce_app/Futures/auth/Login/views/loginviwe.dart';
 import 'package:cce_app/router.dart';
@@ -47,18 +48,25 @@ class CCE_APP extends StatelessWidget {
             borderRadius: BorderRadius.circular(22),
               borderSide: BorderSide(
                   color: Colors.grey.shade400,
-                  width: 0.5
+                  width: 0
               )
           ),
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(22),
+              borderSide: BorderSide(
+                  width: 0
+              )
+              ,
 
 
           )
 
         ),
         scaffoldBackgroundColor: Colors.white,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(
+            primary:ColorsManager.coustomLabelTextColor ,
+            seedColor: ColorsManager.coustomLabelTextColor
+        ),
         useMaterial3: true,
       ),
       home: const LoginView(), // Start with SplashView
