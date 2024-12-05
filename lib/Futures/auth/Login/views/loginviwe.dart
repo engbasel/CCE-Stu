@@ -125,24 +125,24 @@ class _LoginViewState extends State<LoginView> {
                         },
                       ));
                     },
-                    child: Text(
-                      "Forgot your password?",
+                    child: TextButton(
+                      onPressed: (){},child: Text(
+                      " ? Forget password",
                       style: TextStyle(
-                        fontFamily: Fontsmanger.AbhayaLibreMeduiem,
+                        fontSize: 11.5,
                         color: Colors.grey,
                       ),
                     ),
                   ),
-                ],
+                  )],
               ),
-              SizedBox(height: height * 0.01),
+              // SizedBox(height: height * 0.01),
               CustomButton(
                 buttonColor: ColorsManager.buttonColor,
-                height: 55,
+                height: 50,
                 text: "Login",
                 onPressed: () {
                   // Add your login logic here
-
                   Navigator.popAndPushNamed(context, HomeView.routeName);
                 },
               ),
@@ -153,7 +153,6 @@ class _LoginViewState extends State<LoginView> {
                   text: TextSpan(
                     text: "Don’t have an account ? ",
                     style: TextStyle(
-                      fontFamily: Fontsmanger.AbhayaLibreMeduiem,
                       color: Colors.grey[500],
                       fontSize: 14,
                     ),
