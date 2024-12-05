@@ -1,5 +1,6 @@
-import 'package:cce_app/Core/widgets/CustomSmallButton.dart';
 import 'package:flutter/material.dart';
+
+import '../../../Core/helpers/CustomSmallButton.dart';
 
 class StudyResourcesSection extends StatelessWidget {
   const StudyResourcesSection({super.key});

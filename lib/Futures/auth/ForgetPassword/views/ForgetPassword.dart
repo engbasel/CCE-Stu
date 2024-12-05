@@ -1,11 +1,12 @@
 import 'package:cce_app/Core/manager/ColorsManager.dart';
 import 'package:cce_app/Core/manager/FontsManger.dart';
 import 'package:cce_app/Core/manager/imagesManger.dart';
-import 'package:cce_app/Core/widgets/CustomButton.dart';
-import 'package:cce_app/Core/widgets/CustomLabelHintText.dart';
-import 'package:cce_app/Core/widgets/CustomTextFormField.dart';
 import 'package:cce_app/Futures/auth/Login/views/loginviwe.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../Core/helpers/CustomButton.dart';
+import '../../../../Core/helpers/CustomLabelHintText.dart';
+import '../../../../Core/helpers/CustomTextFormField.dart';
 
 class Forgetpassword extends StatelessWidget {
   const Forgetpassword({super.key});

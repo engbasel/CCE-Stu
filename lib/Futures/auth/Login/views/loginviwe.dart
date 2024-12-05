@@ -1,4 +1,3 @@
-import 'package:cce_app/Core/widgets/CustomTextFormField.dart';
 import 'package:cce_app/Futures/Home/view/homeviwe.dart';
 import 'package:cce_app/Futures/auth/ForgetPassword/views/ForgetPassword.dart';
 import 'package:cce_app/Futures/auth/Signup/views/Signupview.dart';
@@ -6,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:cce_app/Core/manager/ColorsManager.dart';
 import 'package:cce_app/Core/manager/FontsManger.dart';
 import 'package:cce_app/Core/manager/imagesManger.dart';
-import 'package:cce_app/Core/widgets/CustomButton.dart';
-import 'package:cce_app/Core/widgets/CustomLabelHintText.dart';
-import 'package:cce_app/Core/widgets/customcheckbox.dart';
+
+import '../../../../Core/helpers/CustomButton.dart';
+import '../../../../Core/helpers/CustomLabelHintText.dart';
+import '../../../../Core/helpers/CustomTextFormField.dart';
+import '../../../Home/widget/customcheckbox.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
