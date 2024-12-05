@@ -1,13 +1,14 @@
 part of  'package:cce_app/Futures/auth/Signup/views/Signupview.dart';
 class AlreadyHaveAccountWidget extends StatelessWidget {
-  const AlreadyHaveAccountWidget({super.key});
+  const AlreadyHaveAccountWidget({super.key,required this.type});
+  final String type;
   @override
   Widget build(BuildContext context) {
     return   Center(
       child: RichText(
         textAlign: TextAlign.center,
         text: TextSpan(
-          text: "Already have an account?  ",
+          text: type=='register'?"Already have an account?  ": "  return to  ",
           style: kTextStyle11grey.copyWith(fontSize: 14),
           children: [
             WidgetSpan(

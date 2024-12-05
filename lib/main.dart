@@ -1,5 +1,6 @@
 import 'package:cce_app/Core/manager/ColorsManager.dart';
 import 'package:cce_app/Futures/Home/view/homeviwe.dart';
+import 'package:cce_app/Futures/auth/ForgetPassword/views/ForgetPassword.dart';
 import 'package:cce_app/Futures/auth/Login/views/loginviwe.dart';
 import 'package:cce_app/Futures/auth/Signup/views/Signupview.dart';
 import 'package:cce_app/router.dart';
@@ -70,7 +71,7 @@ class CCE_APP extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const SignupView(), // Start with SplashView
+      home: const Forgetpassword(), // Start with SplashView
     );
   }
 }

@@ -27,7 +27,7 @@ class _SignupViewState extends State<SignupView> {
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 12.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -91,7 +91,7 @@ class _SignupViewState extends State<SignupView> {
                 onPressed: () {},
               ),
               space,
-              AlreadyHaveAccountWidget(),
+              AlreadyHaveAccountWidget(type: "register",),
               const SizedBox(height: 20),
             ],
           ),
