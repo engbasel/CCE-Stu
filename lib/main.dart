@@ -1,6 +1,7 @@
 import 'package:cce_app/Futures/Home/view/homeviwe.dart';
 import 'package:cce_app/Futures/auth/Login/views/loginviwe.dart';
 import 'package:cce_app/router.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -10,10 +11,19 @@ import 'generated/l10n.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(const CCE_APP());
+  runApp(
+      EasyLocalization(
+        startLocale: const Locale('en'),
+          fallbackLocale: const Locale('ar'),
+          child: const CCE_APP(),
+          supportedLocales:
+          [Locale('en'),Locale('ar')],
+          path: 'assets/translations')
+      );
 }
 
 // ignore: camel_case_types
@@ -24,13 +34,9 @@ class CCE_APP extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      localizationsDelegates: [
-        S.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-      supportedLocales: S.delegate.supportedLocales,
+      localizationsDelegates:context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
       onGenerateRoute: onGenerateRoute,
       theme: ThemeData(
         textTheme: GoogleFonts.interTightTextTheme(),
