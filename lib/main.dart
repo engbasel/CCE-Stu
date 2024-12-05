@@ -1,6 +1,7 @@
 import 'package:cce_app/Core/manager/ColorsManager.dart';
 import 'package:cce_app/Futures/Home/view/homeviwe.dart';
 import 'package:cce_app/Futures/auth/Login/views/loginviwe.dart';
+import 'package:cce_app/Futures/auth/Signup/views/Signupview.dart';
 import 'package:cce_app/router.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +70,7 @@ class CCE_APP extends StatelessWidget {
         ),
         useMaterial3: true,
       ),
-      home: const LoginView(), // Start with SplashView
+      home: const SignupView(), // Start with SplashView
     );
   }
 }
