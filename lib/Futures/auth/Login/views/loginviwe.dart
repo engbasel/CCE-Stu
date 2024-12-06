@@ -41,6 +41,9 @@ class _LoginViewState extends State<LoginView> {
               const Text('  Enter your ID', style: kTextStyle15),
               SizedBox(height: height * 0.01),
               CustomTextFormField(
+                validator: (p0) {
+                  return null;
+                },
                 hintText: 'student id',
                 controller: _idController,
               ),
@@ -48,6 +51,9 @@ class _LoginViewState extends State<LoginView> {
               const Text('  Enter your password', style: kTextStyle15),
               SizedBox(height: height * 0.01),
               CustomTextFormField(
+                validator: (p0) {
+                  return null;
+                },
                 hintText: 'Password',
                 isPasswordField: true,
                 isPasswordVisible: isPasswordVisible,

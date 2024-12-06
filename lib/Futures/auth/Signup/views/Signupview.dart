@@ -1,4 +1,5 @@
 import 'package:cce_app/Core/manager/ColorsManager.dart';
+import 'package:cce_app/Core/utlis/utilis.dart';
 import 'package:cce_app/Futures/auth/Login/views/loginviwe.dart';
 import 'package:flutter/material.dart';
 import '../../../../Core/helpers/CustomButton.dart';
@@ -8,12 +9,15 @@ import '../../../Home/widget/customcheckbox.dart';
 import '../../widgets/logo_name_app.dart';
 part '../../widgets/first_last_name.dart';
 part 'package:cce_app/Futures/auth/widgets/already_have_account.dart';
+
 class SignupView extends StatefulWidget {
   static const routeName = 'SignupView';
   const SignupView({super.key});
   @override
   State<SignupView> createState() => _SignupViewState();
 }
+
+final ScreenUtils screenUtils = ScreenUtils();
 
 class _SignupViewState extends State<SignupView> {
   final TextEditingController _passwordController = TextEditingController();
@@ -34,17 +38,23 @@ class _SignupViewState extends State<SignupView> {
               SizedBox(height: height * 0.10),
               LogoOfAppWidget(),
               SizedBox(height: height * 0.05),
-              const Text('  Enter your name',style:kTextStyle15),
+              const Text('  Enter your name', style: kTextStyle15),
               space,
               const FirstAndLastNameWidget(),
               const SizedBox(height: 8),
-              const Text('  Enter your email',style:kTextStyle15),
-              space,
-              const CustomTextFormField(hintText: '*****@std.mans.edu.eg'),
-              const SizedBox(height: 8),
-              const Text('  Enter your password',style:kTextStyle15),
+              const Text('  Enter your email', style: kTextStyle15),
               space,
               CustomTextFormField(
+                hintText: '*****@std.mans.edu.eg',
+                validator: screenUtils.stduValidatorfunc,
+              ),
+              const SizedBox(height: 8),
+              const Text('  Enter your password', style: kTextStyle15),
+              space,
+              CustomTextFormField(
+                validator: (p0) {
+                  return null;
+                },
                 hintText: 'Password',
                 isPasswordField: true,
                 isPasswordVisible: isPasswordVisible,
@@ -56,9 +66,12 @@ class _SignupViewState extends State<SignupView> {
                 controller: _passwordController,
               ),
               const SizedBox(height: 8),
-              const Text('  Confirm password',style:kTextStyle15),
+              const Text('  Confirm password', style: kTextStyle15),
               space,
               CustomTextFormField(
+                validator: (p0) {
+                  return null;
+                },
                 hintText: 'Enter the password again',
                 isPasswordField: true,
                 isPasswordVisible: isPasswordVisible,
@@ -77,10 +90,9 @@ class _SignupViewState extends State<SignupView> {
                     isChecked: isRememberMeChecked,
                   ),
                   Text(
-                    textAlign: TextAlign.start,
-                    "I understand and agree to the Stanley\n Terms of Service",
-                    style: kTextStyle14
-                  ),
+                      textAlign: TextAlign.start,
+                      "I understand and agree to the Stanley\n Terms of Service",
+                      style: kTextStyle14),
                 ],
               ),
               const SizedBox(height: 30),
@@ -91,7 +103,9 @@ class _SignupViewState extends State<SignupView> {
                 onPressed: () {},
               ),
               space,
-              AlreadyHaveAccountWidget(type: "register",),
+              AlreadyHaveAccountWidget(
+                type: "register",
+              ),
               const SizedBox(height: 20),
             ],
           ),

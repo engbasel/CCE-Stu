@@ -26,4 +26,17 @@ class ScreenUtils {
     print('Initializing screen: $screenName');
     debugPrint('$screenName Initialized');
   }
+
+  String? stduValidatorfunc(String? value) {
+    if (value == null || value.isEmpty) {
+      return 'Please enter your email';
+    }
+
+    final regex = RegExp(r'^[a-zA-Z0-9._%+-]+@std\.mans\.edu\.eg$');
+    if (!regex.hasMatch(value)) {
+      return 'Please enter a valid email from std.mans.edu.eg';
+    }
+
+    return null;
+  }
 }
