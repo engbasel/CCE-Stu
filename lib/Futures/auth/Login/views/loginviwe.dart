@@ -9,6 +9,7 @@ import '../../../../Core/helpers/CustomTextFormField.dart';
 import '../../../Home/widget/customcheckbox.dart';
 import '../../widgets/logo_name_app.dart';
 part '../../widgets/donot_have_account.dart';
+
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
   static const routeName = 'LoginView';
@@ -16,6 +17,7 @@ class LoginView extends StatefulWidget {
   @override
   _LoginViewState createState() => _LoginViewState();
 }
+
 class _LoginViewState extends State<LoginView> {
   bool isPasswordVisible = false;
   bool isRememberMeChecked = false;
@@ -25,7 +27,7 @@ class _LoginViewState extends State<LoginView> {
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor:Colors.white,
+      backgroundColor: Colors.white,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10.0),
         child: SingleChildScrollView(
@@ -33,17 +35,17 @@ class _LoginViewState extends State<LoginView> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: height *0.10),
+              SizedBox(height: height * 0.10),
               LogoOfAppWidget(),
               SizedBox(height: height * 0.15),
-              const Text('  Enter your ID',style:kTextStyle15),
+              const Text('  Enter your ID', style: kTextStyle15),
               SizedBox(height: height * 0.01),
               CustomTextFormField(
                 hintText: 'student id',
                 controller: _idController,
               ),
               SizedBox(height: height * 0.03),
-              const Text('  Enter your password',style:kTextStyle15),
+              const Text('  Enter your password', style: kTextStyle15),
               SizedBox(height: height * 0.01),
               CustomTextFormField(
                 hintText: 'Password',
@@ -65,10 +67,7 @@ class _LoginViewState extends State<LoginView> {
                       CustomCheckbox(
                         isChecked: isRememberMeChecked,
                       ),
-                      Text(
-                        "Remember me",
-                        style:kTextStyle14
-                      ),
+                      Text("Remember me", style: kTextStyle14),
                     ],
                   ),
                   TextButton(
@@ -80,13 +79,12 @@ class _LoginViewState extends State<LoginView> {
                       ));
                     },
                     child: TextButton(
-                      onPressed: (){},
-                      child: Text(
-                      " Forget password ?",
-                      style: kTextStyle11grey
+                      onPressed: () {},
+                      child:
+                          Text(" Forget password ?", style: kTextStyle11grey),
                     ),
-                  ),
-                  )],
+                  )
+                ],
               ),
               CustomButton(
                 buttonColor: ColorsManager.buttonColor,

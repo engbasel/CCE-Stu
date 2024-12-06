@@ -1,6 +1,9 @@
+import 'package:cce_app/Core/helpers/styles.dart';
+import 'package:cce_app/Core/manager/ColorsManager.dart';
+import 'package:flutter/material.dart';
+import 'package:cce_app/Core/utlis/utilis.dart';
 import 'package:cce_app/Core/Constans/Constans.dart';
 import 'package:cce_app/Futures/auth/Login/views/loginviwe.dart';
-import 'package:flutter/material.dart';
 import 'package:cce_app/Core/manager/imagesManger.dart';
 
 class SplashView extends StatefulWidget {
@@ -13,24 +16,55 @@ class SplashView extends StatefulWidget {
 }
 
 class _SplashViewState extends State<SplashView> {
+  final ScreenUtils screenUtils = ScreenUtils();
+
   @override
   void initState() {
     super.initState();
-    // Navigate to the next screen after 4 seconds
-    Future.delayed(Duration(seconds: Constans.Duration_splash_screen), () {
+
+    _handleSplashNavigation();
+  }
+
+  Future<void> _handleSplashNavigation() async {
+    bool hasSeenSplash = await screenUtils.hasSeenSplashScreen();
+
+    if (hasSeenSplash) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const LoginView()),
       );
-    });
+    } else {
+      await screenUtils.markSplashScreenAsSeen();
+
+      Future.delayed(Duration(seconds: Constans.splashScreenDuration), () {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const LoginView()),
+        );
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xfff8fefe),
+      backgroundColor: ColorsManager.backgroundScaffoldColor,
       body: Center(
-        child: Image.asset(Imagesmanger.CCE_Logo), // Display your logo
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Spacer(flex: 2),
+            Image.asset(Imagesmanger.CCE_Logo),
+            SizedBox(height: 20),
+            Spacer(flex: 5),
+            Text(
+              'L o a d i n g ...',
+              style: Ktextstyle24Wite700,
+            ),
+            Spacer(),
+          ],
+        ), // Display your logo
       ),
     );
   }
