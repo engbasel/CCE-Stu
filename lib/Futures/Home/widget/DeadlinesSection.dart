@@ -1,3 +1,4 @@
+import 'package:cce_app/Core/manager/ColorsManager.dart';
 import 'package:cce_app/Futures/Home/widget/EventDetailPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -44,43 +45,84 @@ class EventsandDeadlinesSection extends StatelessWidget {
 
             final deadlines = snapshot.data!.docs;
 
-            return ListView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemCount: deadlines.length,
-              itemBuilder: (context, index) {
-                final deadline =
-                    deadlines[index].data() as Map<String, dynamic>;
-                final String id = deadlines[index].id;
-                final String title = deadline['title'] ?? 'No Title';
-                final DateTime date = (deadline['date'] as Timestamp).toDate();
-                final String formattedDate =
-                    '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
-
-                return Card(
-                  color: Colors.white,
-                  margin:
-                      const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-                  elevation: 2,
-                  child: ListTile(
-                    leading: const Icon(Icons.event, color: Colors.blue),
-                    title: Text(title),
-                    subtitle: Text(formattedDate),
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => EventDetailPage(eventId: id),
-                        ),
-                      );
-                    },
-                  ),
-                );
-              },
-            );
+            return ListOfCommingUpEventsandDeadlinesSection(
+                deadlines: deadlines);
           },
         ),
       ],
+    );
+  }
+}
+
+class ListOfCommingUpEventsandDeadlinesSection extends StatelessWidget {
+  const ListOfCommingUpEventsandDeadlinesSection({
+    super.key,
+    required this.deadlines,
+  });
+
+  final List<QueryDocumentSnapshot<Object?>> deadlines;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: deadlines.length,
+      itemBuilder: (context, index) {
+        final deadline = deadlines[index].data() as Map<String, dynamic>;
+        final String id = deadlines[index].id;
+        final String title = deadline['title'] ?? 'No Title';
+        final DateTime date = (deadline['date'] as Timestamp).toDate();
+        final String formattedDate =
+            '${date.year}-${date.month.toString().padLeft(2, '0')}-${date.day.toString().padLeft(2, '0')}';
+
+        return Card(
+          color: Colors.white,
+          margin: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+          elevation: 2,
+          child: ItemOfUpCommingList(
+              title: title, formattedDate: formattedDate, id: id),
+        );
+      },
+    );
+  }
+}
+
+class ItemOfUpCommingList extends StatelessWidget {
+  const ItemOfUpCommingList({
+    super.key,
+    required this.title,
+    required this.formattedDate,
+    required this.id,
+  });
+
+  final String title;
+  final String formattedDate;
+  final String id;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: const Icon(
+        Icons.event,
+        color: ColorsManager.billIconColor,
+      ),
+      title: Text(
+        title,
+        style: TextStyle(color: Color(0xff808080)),
+      ),
+      subtitle: Text(
+        formattedDate,
+        style: TextStyle(color: Color(0xff808080)),
+      ),
+      onTap: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => EventDetailPage(eventId: id),
+          ),
+        );
+      },
     );
   }
 }
