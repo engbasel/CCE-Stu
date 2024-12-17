@@ -1,10 +1,11 @@
+import 'package:cce_app/Core/Constans/Constans.dart';
 import 'package:cce_app/Futures/Home/Models/Course.dart';
 import 'package:cce_app/Futures/Home/widget/CommonNewsSection.dart';
 import 'package:cce_app/Futures/Home/widget/CoursesSection.dart';
 import 'package:cce_app/Futures/Home/widget/DeadlinesSection.dart';
 import 'package:cce_app/Futures/Home/widget/GreetingSection.dart';
 import 'package:cce_app/Futures/Home/widget/NotesSection.dart';
-import 'package:cce_app/Futures/Home/widget/NotificationsSection.dart';
+// import 'package:cce_app/Futures/Home/widget/NotificationsSection.dart';
 import 'package:cce_app/Futures/Home/widget/PopularProfessorsSection.dart';
 import 'package:cce_app/Futures/Home/widget/StudyResourcesSection.dart';
 import 'package:flutter/material.dart';
@@ -48,21 +49,23 @@ class HomeViewboady extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          SizedBox(height: 20),
           // Greeting Section
           GreetingSection(
             studentName: 'basel Embaby',
           ),
-          const SizedBox(height: 16.0),
+          // const SizedBox(height: 16.0),
 
-          // Notifications Section - New Feature
-          const NotificationsSection(),
-          const SizedBox(height: 16.0),
+          // // Notifications Section - New Feature
+          // const NotificationsSection(),
+          // const SizedBox(height: 16.0),
 
           //----------------------------- Announcements Section -----------------------------
           // const AnnouncementsSection(),
           //----------------------------- Announcements Section -----------------------------
 
-          const SizedBox(height: 16.0),
+          SizedBox(
+              height: Constans.spacebettwernWelccomesectionandUpcomingsection),
 
           //----------------------------- Deadlines Section -----------------------------
           const EventsandDeadlinesSection(),

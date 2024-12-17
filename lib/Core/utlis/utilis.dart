@@ -13,6 +13,17 @@ class ScreenUtils {
     return hasSeen;
   }
 
+  String getGreeting() {
+    final hour = DateTime.now().hour;
+    if (hour >= 6 && hour < 12) {
+      return 'Good Morning';
+    } else if (hour >= 12 && hour < 18) {
+      return 'Good Afternoon';
+    } else {
+      return 'Good Night';
+    }
+  }
+
   // Method to mark splash screen as seen
   Future<void> markSplashScreenAsSeen() async {
     print('Marking splash screen as seen...');
