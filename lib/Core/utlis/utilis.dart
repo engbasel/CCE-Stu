@@ -24,7 +24,19 @@ class ScreenUtils {
     }
   }
 
+  static String formatText(String text, int maxWordsPerLine) {
+    final words = text.split(' ');
+    List<String> lines = [];
+    for (int i = 0; i < words.length; i += maxWordsPerLine) {
+      lines.add(words
+          .sublist(i, (i + maxWordsPerLine).clamp(0, words.length))
+          .join(' '));
+    }
+    return lines.join('\n');
+  }
+
   // Method to mark splash screen as seen
+
   Future<void> markSplashScreenAsSeen() async {
     print('Marking splash screen as seen...');
     final prefs = await SharedPreferences.getInstance();
