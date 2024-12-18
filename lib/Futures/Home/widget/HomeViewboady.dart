@@ -95,6 +95,9 @@ class HomeViewboady extends StatelessWidget {
           // //---------------------------------- Notes Section ----------------------------------
           // const NotesSection(),
           // //---------------------------------- Notes Section ----------------------------------
+          SizedBox(
+            height: 5,
+          )
         ],
       ),
     );

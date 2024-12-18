@@ -15,20 +15,16 @@ class PopularProfessorsItem extends StatelessWidget {
       width: 220,
       margin: const EdgeInsets.only(right: 16),
       decoration: BoxDecoration(
+        color: Colors.white, // Background is pure white
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
-            spreadRadius: 2,
-            blurRadius: 12,
-            offset: const Offset(0, 8),
+            color: Colors.grey.withOpacity(0.2), // Subtle grey shadow
+            spreadRadius: 3,
+            blurRadius: 8,
+            offset: const Offset(0, 5), // Adds downward shadow effect
           ),
         ],
-        gradient: LinearGradient(
-          colors: [Colors.white, Colors.blue.shade50],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-        ),
       ),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
