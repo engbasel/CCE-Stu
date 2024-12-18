@@ -24,6 +24,16 @@ class ScreenUtils {
     }
   }
 
+  /// Helper function to get initials from the professor's name
+  static String getInitials(String? name) {
+    if (name == null || name.isEmpty) return 'no Given';
+    List<String> splitName = name.split(' ');
+    if (splitName.length >= 2) {
+      return '${splitName[0][0]}${splitName[1][0]}'.toUpperCase();
+    }
+    return name[0].toUpperCase();
+  }
+
   static String formatText(String text, int maxWordsPerLine) {
     final words = text.split(' ');
     List<String> lines = [];

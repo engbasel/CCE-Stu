@@ -1,42 +1,16 @@
-import 'package:cce_app/Futures/Home/widget/ProfessorDetailsScreen.dart';
+import 'package:cce_app/Core/utlis/utilis.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'ProfessorDetailsScreen.dart';
 
 class PopularProfessorsSection extends StatelessWidget {
-  const PopularProfessorsSection({super.key});
+  final ScreenUtils screenUtils = ScreenUtils();
 
   @override
   Widget build(BuildContext context) {
-    // Updated real data for professors
-    final professorsList = [
-      {
-        'name': 'Dr. Ahmed Saleh',
-        'department': 'Computer Engineering',
-        'rating': 4.9,
-        'bio':
-            'Dr. Ahmed Saleh is a renowned professor specializing in Artificial Intelligence and Machine Learning with over 20 years of teaching experience.',
-      },
-      {
-        'name': 'Dr. Sara Ayad',
-        'department': 'Electronics and Communications',
-        'rating': 4.8,
-        'bio':
-            'Dr. Sara Ayad focuses on VLSI design and embedded systems. She has published numerous research papers in international journals.',
-      },
-      {
-        'name': 'Dr. Mohamed Fathy',
-        'department': 'Computer Engineering',
-        'rating': 4.7,
-        'bio':
-            'Dr. Mohamed Fathy is an expert in Networking and Security. He has contributed significantly to cloud security research.',
-      },
-      {
-        'name': 'Dr. Hala Ebrahim',
-        'department': 'Electronics and Communications',
-        'rating': 4.6,
-        'bio':
-            'Dr. Hala Ebrahim has expertise in wireless communication systems and antenna design, with numerous accolades in her field.',
-      },
-    ];
+    // Fetch professors collection from Firebase
+    final CollectionReference professorsRef =
+        FirebaseFirestore.instance.collection('PopularProfessors');
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,98 +19,134 @@ class PopularProfessorsSection extends StatelessWidget {
           'Popular Professors',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                 fontWeight: FontWeight.bold,
+                color: Colors.blue.shade900,
               ),
         ),
         const SizedBox(height: 12),
         SizedBox(
-          height: 180,
-          child: ListView.builder(
-            scrollDirection: Axis.horizontal,
-            itemCount: professorsList.length,
-            itemBuilder: (context, index) {
-              final professor = professorsList[index];
-              return GestureDetector(
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          ProfessorDetailsScreen(professor: professor),
-                    ),
-                  );
-                },
-                child: Container(
-                  width: 220,
-                  margin: const EdgeInsets.only(right: 16),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: Colors.grey.shade200),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.1),
-                        spreadRadius: 2,
-                        blurRadius: 6,
-                        offset: const Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        CircleAvatar(
-                          radius: 28,
-                          backgroundColor: Colors.blue.shade100,
-                          child: Text(
-                            '${professor['name']}',
-                            style: const TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.blue,
-                            ),
+          height: 200,
+          child: StreamBuilder<QuerySnapshot>(
+            stream: professorsRef.snapshots(), // Real-time updates
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              }
+              if (snapshot.hasError) {
+                return const Center(child: Text('Error fetching data.'));
+              }
+              final professorsList = snapshot.data?.docs ?? [];
+
+              if (professorsList.isEmpty) {
+                return const Center(child: Text('No professors available.'));
+              }
+
+              return ListView.builder(
+                scrollDirection: Axis.horizontal,
+                itemCount: professorsList.length,
+                itemBuilder: (context, index) {
+                  final professorData =
+                      professorsList[index].data() as Map<String, dynamic>;
+
+                  return GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProfessorDetailsScreen(
+                                professor: professorData),
                           ),
-                        ),
-                        const SizedBox(height: 12),
-                        Text(
-                          '${professor['name']}',
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleMedium
-                              ?.copyWith(fontWeight: FontWeight.bold),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        const SizedBox(height: 6),
-                        Text(
-                          '${professor['department']!}',
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodySmall
-                              ?.copyWith(color: Colors.grey.shade600),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        const Spacer(),
-                        Row(
-                          children: [
-                            const Icon(Icons.star,
-                                color: Colors.amber, size: 18),
-                            const SizedBox(width: 6),
-                            Text(
-                              professor['rating'].toString(),
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodySmall
-                                  ?.copyWith(fontWeight: FontWeight.bold),
+                        );
+                      },
+                      child: Container(
+                        width: 220,
+                        margin: const EdgeInsets.only(right: 16),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16),
+                          boxShadow: [
+                            BoxShadow(
+                              // ignore: deprecated_member_use
+                              color: Colors.black.withOpacity(0.05),
+                              spreadRadius: 2,
+                              blurRadius: 12,
+                              offset: const Offset(0, 8),
                             ),
                           ],
+                          gradient: LinearGradient(
+                            colors: [Colors.white, Colors.blue.shade50],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
                         ),
-                      ],
-                    ),
-                  ),
-                ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // CircleAvatar with initials
+                              CircleAvatar(
+                                // will repalce this with Prof Image
+                                radius: 28,
+                                backgroundColor: Colors.blue.shade100,
+                                child: Text(
+                                  // will replace with photo of prefeser
+                                  ScreenUtils.getInitials(
+                                      professorData['name']),
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.blue,
+                                  ),
+                                ),
+                              ),
+                              const SizedBox(height: 12),
+                              // Professor Name
+                              Text(
+                                professorData['name'] ?? 'No Name',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .titleMedium
+                                    ?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.black87,
+                                    ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const SizedBox(height: 6),
+                              // Department
+                              Text(
+                                professorData['department'] ?? 'No Department',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodySmall
+                                    ?.copyWith(color: Colors.grey.shade700),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              const Spacer(),
+                              // Rating
+                              Row(
+                                children: [
+                                  const Icon(Icons.star,
+                                      color: Colors.amber, size: 18),
+                                  const SizedBox(width: 4),
+                                  Text(
+                                    professorData['rating'] ??
+                                        'No rating Given',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodySmall
+                                        ?.copyWith(color: Colors.grey.shade700),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                        ),
+                      ));
+                },
               );
             },
           ),
