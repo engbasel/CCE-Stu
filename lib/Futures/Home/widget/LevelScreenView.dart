@@ -1,3 +1,4 @@
+import 'package:cce_app/Core/manager/ColorsManager.dart';
 import 'package:cce_app/Futures/Home/Models/Course.dart';
 import 'package:flutter/material.dart';
 
@@ -17,9 +18,23 @@ class LevelScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('$level - $semester'),
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back,
+              color: Colors.white,
+            )),
+        title: Text(
+          '$level - $semester',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ),
         centerTitle: true, // Center the app bar title
-        backgroundColor: Colors.blue[700], // Add a blue app bar color
+        // backgroundColor: Colors.blue[700], // Add a blue app bar color
+        backgroundColor: ColorsManager.AppBarColor,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0), // Add some padding

@@ -1,5 +1,5 @@
-import 'package:cce_app/Futures/Home/view/homeviwe.dart';
 import 'package:cce_app/Futures/Home/widget/HomeViewboady.dart';
+import 'package:cce_app/Futures/Subjects/views/subjectsView.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
@@ -26,7 +26,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         },
         children: const [
           HomeViewboady(),
-          SchoolScreen(),
+          SubjectsView(),
           Placeholder(), // Center action placeholder screen
           NotesScreen(),
           ProfileScreen(),
