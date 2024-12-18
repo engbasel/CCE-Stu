@@ -1,3 +1,4 @@
+import 'package:cce_app/Core/widgets/CoustomCircularProgressIndicator.dart';
 import 'package:cce_app/Futures/Home/widget/CommonNewsSectionItem.dart';
 import 'package:cce_app/Futures/Home/widget/NewsDetailsScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -28,7 +29,7 @@ class CommonNewsSection extends StatelessWidget {
                 newsCollection.orderBy('date', descending: true).snapshots(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(child: CoustomCircularProgressIndicator());
               }
 
               if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {

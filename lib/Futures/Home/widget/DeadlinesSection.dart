@@ -1,4 +1,5 @@
 import 'package:cce_app/Core/manager/ColorsManager.dart';
+import 'package:cce_app/Core/widgets/CoustomCircularProgressIndicator.dart';
 import 'package:cce_app/Futures/Home/widget/EventDetailPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +32,7 @@ class EventsandDeadlinesSection extends StatelessWidget {
               .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
+              return const Center(child: CoustomCircularProgressIndicator());
             }
 
             if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {

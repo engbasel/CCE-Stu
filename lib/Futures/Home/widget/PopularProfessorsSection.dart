@@ -1,4 +1,5 @@
 import 'package:cce_app/Core/utlis/utilis.dart';
+import 'package:cce_app/Core/widgets/CoustomCircularProgressIndicator.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'ProfessorDetailsScreen.dart';
@@ -19,7 +20,7 @@ class PopularProfessorsSection extends StatelessWidget {
           'Popular Professors',
           style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                 fontWeight: FontWeight.bold,
-                color: Colors.blue.shade900,
+                color: Colors.black,
               ),
         ),
         const SizedBox(height: 12),
@@ -29,7 +30,7 @@ class PopularProfessorsSection extends StatelessWidget {
             stream: professorsRef.snapshots(), // Real-time updates
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
+                return const Center(child: CoustomCircularProgressIndicator());
               }
               if (snapshot.hasError) {
                 return const Center(child: Text('Error fetching data.'));
