@@ -45,60 +45,66 @@ class HomeViewboady extends StatelessWidget {
     //     prerequisite: 'Calculus I',
     //   ),
     // ];
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 20),
-          // Greeting Section
-          GreetingSection(
-            studentName: 'basel Embaby',
+    return SafeArea(
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 3, vertical: 2),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SizedBox(height: 20),
+              // Greeting Section
+              GreetingSection(
+                studentName: 'basel Embaby',
+              ),
+              // const SizedBox(height: 16.0),
+
+              // // Notifications Section - New Feature
+              // const NotificationsSection(),
+              // const SizedBox(height: 16.0),
+
+              //----------------------------- Announcements Section -----------------------------
+              // const AnnouncementsSection(),
+              //----------------------------- Announcements Section -----------------------------
+
+              SizedBox(
+                  height:
+                      Constans.spacebettwernWelccomesectionandUpcomingsection),
+
+              //----------------------------- Deadlines Section -----------------------------
+              const EventsandDeadlinesSection(),
+              //----------------------------- Deadlines Section -----------------------------
+
+              const SizedBox(height: 16.0),
+              // ---------------------------------- Common News Section -----------------------------
+              CommonNewsSection(),
+              // ---------------------------------- Common News Section -----------------------------
+
+              // ---------------------------------- Popular Professors Section ----------------------
+              PopularProfessorsSection(),
+              // ---------------------------------- Popular Professors Section ----------------------
+
+              // // ---------------------------------- Courses Section ---------------------------------
+              // CoursesSection(courses: courses),
+              // // ---------------------------------- Courses Section ---------------------------------
+
+              // const SizedBox(height: 16.0),
+
+              // //  ---------------------------------- Study Resources Section ------------------------
+              // const StudyResourcesSection(),
+              // //  ---------------------------------- Study Resources Section ------------------------
+
+              // const SizedBox(height: 16.0),
+
+              // //---------------------------------- Notes Section ----------------------------------
+              // const NotesSection(),
+              // //---------------------------------- Notes Section ----------------------------------
+              SizedBox(
+                height: 5,
+              )
+            ],
           ),
-          // const SizedBox(height: 16.0),
-
-          // // Notifications Section - New Feature
-          // const NotificationsSection(),
-          // const SizedBox(height: 16.0),
-
-          //----------------------------- Announcements Section -----------------------------
-          // const AnnouncementsSection(),
-          //----------------------------- Announcements Section -----------------------------
-
-          SizedBox(
-              height: Constans.spacebettwernWelccomesectionandUpcomingsection),
-
-          //----------------------------- Deadlines Section -----------------------------
-          const EventsandDeadlinesSection(),
-          //----------------------------- Deadlines Section -----------------------------
-
-          const SizedBox(height: 16.0),
-          // ---------------------------------- Common News Section -----------------------------
-          CommonNewsSection(),
-          // ---------------------------------- Common News Section -----------------------------
-
-          // ---------------------------------- Popular Professors Section ----------------------
-          PopularProfessorsSection(),
-          // ---------------------------------- Popular Professors Section ----------------------
-
-          // // ---------------------------------- Courses Section ---------------------------------
-          // CoursesSection(courses: courses),
-          // // ---------------------------------- Courses Section ---------------------------------
-
-          // const SizedBox(height: 16.0),
-
-          // //  ---------------------------------- Study Resources Section ------------------------
-          // const StudyResourcesSection(),
-          // //  ---------------------------------- Study Resources Section ------------------------
-
-          // const SizedBox(height: 16.0),
-
-          // //---------------------------------- Notes Section ----------------------------------
-          // const NotesSection(),
-          // //---------------------------------- Notes Section ----------------------------------
-          SizedBox(
-            height: 5,
-          )
-        ],
+        ),
       ),
     );
   }

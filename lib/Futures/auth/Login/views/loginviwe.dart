@@ -1,4 +1,5 @@
 import 'package:cce_app/Core/helpers/styles.dart';
+import 'package:cce_app/Core/widgets/CustombottomNavigationBar.dart';
 import 'package:cce_app/Futures/Home/view/homeviwe.dart';
 import 'package:cce_app/Futures/auth/ForgetPassword/views/ForgetPassword.dart';
 import 'package:cce_app/Futures/auth/Signup/views/Signupview.dart';
@@ -78,11 +79,14 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   TextButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(
-                        builder: (context) {
-                          return const Forgetpassword();
-                        },
-                      ));
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) {
+                            return const Forgetpassword();
+                          },
+                        ),
+                      );
                     },
                     child: TextButton(
                       onPressed: () {},
@@ -98,7 +102,16 @@ class _LoginViewState extends State<LoginView> {
                 text: "Login",
                 onPressed: () {
                   // Add your login logic here
-                  Navigator.popAndPushNamed(context, HomeView.routeName);
+                  // Navigator.popAndPushNamed(context, HomeView.routeName);
+
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return const CustomBottomNavigationBar();
+                      },
+                    ),
+                  );
                 },
               ),
               SizedBox(height: height * 0.01),

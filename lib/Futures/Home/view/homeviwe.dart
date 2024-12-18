@@ -1,5 +1,5 @@
 // import 'package:cce_app/Futures/Home/widget/CustomDrawer.dart';
-import 'package:cce_app/Futures/Home/widget/CustombottomNavigationBar.dart';
+import 'package:cce_app/Core/widgets/CustombottomNavigationBar.dart';
 import 'package:cce_app/Futures/Home/widget/HomeViewboady.dart';
 import 'package:flutter/material.dart';
 
@@ -17,7 +17,7 @@ class HomeView extends StatelessWidget {
       //   color: ColorsManager.buttomnavigationbar,
       // ),
       // floatingActionButton: CustomNavigationBar(),
-      bottomNavigationBar: CustombottomNavigationBar(),
+      bottomNavigationBar: CustomBottomNavigationBar(),
       // backgroundColor: ColorsManager.backgroundScaffoldColor,
       // appBar: CustomAppBar(), // This now works fine
       // drawer: CustomDrawer(),

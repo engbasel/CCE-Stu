@@ -6,22 +6,25 @@ class PopularProfessorsSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          'Popular Professors',
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                fontWeight: FontWeight.bold,
-                color: Colors.black,
-              ),
-        ),
-        const SizedBox(height: 12),
-        const SizedBox(
-          height: 200,
-          child: PopularProfessorsListView(), // Refactored ListView
-        ),
-      ],
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 5),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Popular Professors',
+            style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black,
+                ),
+          ),
+          const SizedBox(height: 12),
+          const SizedBox(
+            height: 200,
+            child: PopularProfessorsListView(), // Refactored ListView
+          ),
+        ],
+      ),
     );
   }
 }
