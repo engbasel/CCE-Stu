@@ -1,13 +1,13 @@
 import 'package:cce_app/Core/Constans/Constans.dart';
-import 'package:cce_app/Futures/Home/Models/Course.dart';
+// import 'package:cce_app/Futures/Home/Models/Course.dart';
 import 'package:cce_app/Futures/Home/widget/CommonNewsSection.dart';
-import 'package:cce_app/Futures/Home/widget/CoursesSection.dart';
+// import 'package:cce_app/Futures/Home/widget/CoursesSection.dart';
 import 'package:cce_app/Futures/Home/widget/DeadlinesSection.dart';
 import 'package:cce_app/Futures/Home/widget/GreetingSection.dart';
-import 'package:cce_app/Futures/Home/widget/NotesSection.dart';
+// import 'package:cce_app/Futures/Home/widget/NotesSection.dart';
 // import 'package:cce_app/Futures/Home/widget/NotificationsSection.dart';
 import 'package:cce_app/Futures/Home/widget/PopularProfessorsSection.dart';
-import 'package:cce_app/Futures/Home/widget/StudyResourcesSection.dart';
+// import 'package:cce_app/Futures/Home/widget/StudyResourcesSection.dart';
 import 'package:flutter/material.dart';
 
 class HomeViewboady extends StatelessWidget {
