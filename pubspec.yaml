@@ -21,6 +21,7 @@ dependencies:
   printing: ^5.13.4
   google_fonts: ^6.2.1
   easy_localization: ^3.0.7
+  skeletonizer: 
 
 dev_dependencies:
   flutter_test:

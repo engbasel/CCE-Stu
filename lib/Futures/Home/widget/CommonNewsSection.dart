@@ -1,8 +1,8 @@
-import 'package:cce_app/Core/widgets/CoustomCircularProgressIndicator.dart';
 import 'package:cce_app/Futures/Home/widget/CommonNewsSectionItem.dart';
 import 'package:cce_app/Futures/Home/widget/NewsDetailsScreen.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class CommonNewsSection extends StatelessWidget {
   const CommonNewsSection({super.key});
@@ -33,10 +33,8 @@ class CommonNewsSection extends StatelessWidget {
               stream:
                   newsCollection.orderBy('date', descending: true).snapshots(),
               builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(
-                      child: CoustomCircularProgressIndicator());
-                }
+                final isLoading =
+                    snapshot.connectionState == ConnectionState.waiting;
 
                 if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
                   return const Center(
@@ -49,39 +47,43 @@ class CommonNewsSection extends StatelessWidget {
 
                 final newsList = snapshot.data!.docs;
 
-                return ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: newsList.length,
-                  itemBuilder: (context, index) {
-                    final news = newsList[index].data() as Map<String, dynamic>;
-                    final String title = news['title'] ?? 'No Title';
-                    final String content =
-                        news['description'] ?? 'No description';
+                return Skeletonizer(
+                  enabled: isLoading,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: newsList.length,
+                    itemBuilder: (context, index) {
+                      final news =
+                          newsList[index].data() as Map<String, dynamic>;
+                      final String title = news['title'] ?? 'No Title';
+                      final String content =
+                          news['description'] ?? 'No description';
 
-                    // Fix for Timestamp conversion
-                    final Timestamp timestamp = news['date'] as Timestamp;
-                    final DateTime dateTime = timestamp.toDate();
-                    final String formattedDate =
-                        '${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}';
+                      // Fix for Timestamp conversion
+                      final Timestamp timestamp = news['date'] as Timestamp;
+                      final DateTime dateTime = timestamp.toDate();
+                      final String formattedDate =
+                          '${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}';
 
-                    return GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => NewsDetailsScreen(
-                              news: news,
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => NewsDetailsScreen(
+                                news: news,
+                              ),
                             ),
-                          ),
-                        );
-                      },
-                      child: CommonNewsSectionItem(
-                        title: title,
-                        content: content,
-                        formattedDate: formattedDate,
-                      ),
-                    );
-                  },
+                          );
+                        },
+                        child: CommonNewsSectionItem(
+                          title: title,
+                          content: content,
+                          formattedDate: formattedDate,
+                        ),
+                      );
+                    },
+                  ),
                 );
               },
             ),
