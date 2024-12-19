@@ -2,6 +2,7 @@ import 'package:cce_app/Futures/Home/widget/OpenCourseRequest.dart';
 import 'package:cce_app/Futures/Home/widget/StudyMaterialview.dart';
 import 'package:cce_app/Futures/Home/widget/buildLevelSection.dart';
 import 'package:cce_app/Futures/Settings/view/SettingsView.dart';
+import 'package:cce_app/Core/manager/ColorsManager.dart';
 import 'package:flutter/material.dart';
 
 class CustomDrawer extends StatelessWidget {
@@ -17,73 +18,60 @@ class CustomDrawer extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
-          // Drawer Header
           const DrawerHeader(
             decoration: BoxDecoration(
-              color: Colors.blue,
+              color: ColorsManager.AppBarColor,
             ),
             child: Text(
-              'Student Dashboard',
+              'Welcome to CCE App',
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
-          // General Navigation Items
-          ListTile(
-            leading: const Icon(Icons.home),
-            title: const Text('Home'),
-            onTap: () {
-              Navigator.pop(context); // Close the drawer
-            },
+          buildDrawerItem(
+            icon: Icons.home,
+            text: 'Home',
+            onTap: () => Navigator.pop(context),
           ),
-          ListTile(
-            leading: const Icon(Icons.book),
-            title: const Text('Study Materials'),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(
-                builder: (context) {
-                  return const StudyMaterial();
-                },
-              ));
-            },
+          buildDrawerItem(
+            icon: Icons.book,
+            text: 'Study Materials',
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const StudyMaterial(),
+              ),
+            ),
           ),
-          ListTile(
-            leading: const Icon(Icons.schedule),
-            title: const Text('Your Timetable'),
-            onTap: () {
-              Navigator.pop(context);
-            },
+          buildDrawerItem(
+            icon: Icons.schedule,
+            text: 'Your Timetable',
+            onTap: () => Navigator.pop(context),
           ),
-          ListTile(
-            leading: const Icon(Icons.notes),
-            title: const Text('Personal Notes'),
-            onTap: () {
-              Navigator.pop(context);
-            },
+          buildDrawerItem(
+            icon: Icons.notes,
+            text: 'Personal Notes',
+            onTap: () => Navigator.pop(context),
           ),
-          ListTile(
-            leading: const Icon(Icons.history),
-            title: const Text('Grades History'),
-            onTap: () {
-              Navigator.pop(context);
-            },
+          buildDrawerItem(
+            icon: Icons.history,
+            text: 'Grades History',
+            onTap: () => Navigator.pop(context),
           ),
-          ListTile(
-            leading: const Icon(Icons.settings),
-            title: const Text('Settings'),
-            onTap: () {
-              Navigator.push(context, MaterialPageRoute(
-                builder: (context) {
-                  return SettingsView();
-                },
-              ));
-            },
+          buildDrawerItem(
+            icon: Icons.settings,
+            text: 'Settings',
+            onTap: () => Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => SettingsView(),
+              ),
+            ),
           ),
           const Divider(),
-
-          // Academic Levels Navigation
           ExpansionTile(
             leading: const Icon(Icons.school),
             title: const Text('Academic Subjects'),
@@ -95,35 +83,45 @@ class CustomDrawer extends StatelessWidget {
               buildLevelSection(context, 'Level 400'),
             ],
           ),
-
           const Divider(),
           ExpansionTile(
-            title: const Text('Academic applications'),
+            title: const Text('Academic Applications'),
             children: <Widget>[
-              ListTile(
-                title: const Text('Apply for open unregular course'),
-                leading: const Icon(Icons.attach_money),
-                onTap: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => OpenCourseRequest(),
-                    ),
-                  );
-                },
+              buildDrawerItem(
+                icon: Icons.attach_money,
+                text: 'Apply for Open Unregular Course',
+                onTap: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => OpenCourseRequest(),
+                  ),
+                ),
               ),
-              ListTile(
-                title: const Text('Apply for Scholarship'),
-                leading: const Icon(Icons.attach_money),
-                onTap: () {
-                  Navigator.pop(context);
-                },
+              buildDrawerItem(
+                icon: Icons.attach_money,
+                text: 'Apply for Scholarship',
+                onTap: () => Navigator.pop(context),
               ),
             ],
           ),
           const Divider(),
         ],
       ),
+    );
+  }
+
+  ListTile buildDrawerItem({
+    required IconData icon,
+    required String text,
+    required VoidCallback onTap,
+  }) {
+    return ListTile(
+      leading: Icon(icon, color: ColorsManager.billIconColor),
+      title: Text(
+        text,
+        style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+      ),
+      onTap: onTap,
     );
   }
 }
