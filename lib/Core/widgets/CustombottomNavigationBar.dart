@@ -1,3 +1,4 @@
+import 'package:cce_app/Core/widgets/CoustomDrawer.dart';
 import 'package:cce_app/Futures/Home/widget/HomeViewboady.dart';
 import 'package:cce_app/Futures/Subjects/views/subjectsView.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: CoustomDrawer(),
       body: PageView(
         controller: _pageController,
         onPageChanged: (index) {
@@ -76,9 +78,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
       child: Icon(
         icon,
         size: 28,
-        color: isSelected
-            ? Colors.white
-            : Colors.black, // Selected and non-selected colors
+        color: isSelected ? Colors.white : Colors.black,
       ),
     );
   }
@@ -87,8 +87,6 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   Widget buildCenterActionButton() {
     return GestureDetector(
       onTap: () {
-        // Navigate to a specific placeholder or trigger an action
-        print("Center button pressed");
         _pageController.animateToPage(
           2,
           duration: const Duration(milliseconds: 300),
@@ -112,37 +110,12 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   }
 }
 
-/// Example placeholder screens
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Home Screen', style: TextStyle(fontSize: 24)),
-    );
-  }
-}
-
-class SchoolScreen extends StatelessWidget {
-  const SchoolScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Center(
-      child: Text('School Screen', style: TextStyle(fontSize: 24)),
-    );
-  }
-}
-
 class NotesScreen extends StatelessWidget {
   const NotesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Notes Screen', style: TextStyle(fontSize: 24)),
-    );
+    return const Placeholder();
   }
 }
 
@@ -151,8 +124,6 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(
-      child: Text('Profile Screen', style: TextStyle(fontSize: 24)),
-    );
+    return const Placeholder();
   }
 }

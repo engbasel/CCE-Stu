@@ -1,4 +1,3 @@
-// import 'package:cce_app/Core/utlis/utilis.dart';
 import 'package:cce_app/Core/manager/ColorsManager.dart';
 import 'package:flutter/material.dart';
 
@@ -6,14 +5,12 @@ import 'package:flutter/material.dart';
 class GreetingSection extends StatelessWidget {
   final String studentName;
   bool billIsActive = false;
+
   GreetingSection({Key? key, this.studentName = 'Basel Embaby'})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    // final screenUtils = ScreenUtils();
-    // final greetingMessage = '${screenUtils.getGreeting()}, $studentName!';
-
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Row(
@@ -26,12 +23,6 @@ class GreetingSection extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Text(
-                //   greetingMessage,
-                //   style: Theme.of(context).textTheme.headlineSmall,
-                //   overflow: TextOverflow.ellipsis,
-                // ),
-
                 Text(
                   'Hello Basel',
                   style: TextStyle(
@@ -49,7 +40,6 @@ class GreetingSection extends StatelessWidget {
           const SizedBox(width: 20),
           IconButton(
             onPressed: () {
-              // Toggle the state when the button is pressed
               billIsActive = !billIsActive;
             },
             icon: Icon(
@@ -59,13 +49,17 @@ class GreetingSection extends StatelessWidget {
                   : Icons.notifications_off,
             ),
           ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              Icons.list,
-              color: ColorsManager.billIconColor,
+          Builder(
+            builder: (context) => IconButton(
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+              icon: const Icon(
+                Icons.list,
+                color: ColorsManager.billIconColor,
+              ),
+              iconSize: MediaQuery.of(context).size.width * 0.07,
             ),
-            iconSize: MediaQuery.of(context).size.width * 0.07,
           ),
         ],
       ),
