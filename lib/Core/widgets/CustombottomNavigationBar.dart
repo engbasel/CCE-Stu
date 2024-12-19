@@ -1,4 +1,4 @@
-import 'package:cce_app/Core/widgets/CoustomDrawer.dart';
+import 'package:cce_app/Core/widgets/CustomDrawer.dart';
 import 'package:cce_app/Futures/Home/widget/HomeViewboady.dart';
 import 'package:cce_app/Futures/Subjects/views/subjectsView.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: CoustomDrawer(),
+      drawer: CustomDrawer(),
       body: PageView(
         controller: _pageController,
         onPageChanged: (index) {
