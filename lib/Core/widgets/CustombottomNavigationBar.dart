@@ -32,7 +32,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         children: const [
           HomeViewboady(),
           SubjectsView(),
-          Notesview(),
+          NotesView(),
           Profileview(),
         ],
       ),
