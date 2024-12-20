@@ -1,4 +1,5 @@
 import 'package:cce_app/CCEAPP.dart';
+import 'package:cce_app/Futures/Notes/helper/DatabaseHelper.dart';
 import 'package:cce_app/firebase_options.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -10,10 +11,18 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(EasyLocalization(
+  await DatabaseHelper().database;
+
+  runApp(
+    EasyLocalization(
       startLocale: const Locale('en'),
       fallbackLocale: const Locale('ar'),
       child: const CCEAPP(),
-      supportedLocales: [Locale('en'), Locale('ar')],
-      path: 'assets/translations'));
+      supportedLocales: [
+        Locale('en'),
+        Locale('ar'),
+      ],
+      path: 'assets/translations',
+    ),
+  );
 }

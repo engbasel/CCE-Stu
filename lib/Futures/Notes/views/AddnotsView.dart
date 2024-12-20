@@ -1,4 +1,5 @@
 import 'package:cce_app/Core/utlis/utilis.dart';
+import 'package:cce_app/Futures/Notes/helper/DatabaseHelper.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
@@ -16,29 +17,100 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
   File? _selectedImage;
   final ScreenUtils screenUtils = ScreenUtils();
 
-  String get _currentDateTime =>
-      DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.now());
+  Future<void> _saveNote() async {
+    try {
+      print('Starting note saving process...');
 
-  void _saveNote() {
-    final title = _titleController.text.trim();
-    final content = _contentController.text.trim();
+      final title = _titleController.text.trim();
+      final content = _contentController.text.trim();
+      final dateTime =
+          _currentDateTime.toString(); // Ensure date is in string format
+      final imagePath = _selectedImage?.path ?? '';
 
-    if (title.isNotEmpty && content.isNotEmpty) {
-      // Handle saving logic here
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Note saved successfully!')),
-      );
-      _titleController.clear();
-      _contentController.clear();
-      setState(() {
-        _selectedImage = null;
-      });
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please fill in all fields.')),
-      );
+      print(
+          'Validating note data - Title: $title, Content length: ${content.length}');
+
+      if (title.isNotEmpty && content.isNotEmpty) {
+        // Prepare the note data
+        final note = {
+          'title': title,
+          'content': content,
+          'date_time': dateTime,
+          'image_path': imagePath,
+        };
+
+        print('Prepared note data: $note');
+
+        // Create a single instance of DatabaseHelper
+        final dbHelper = DatabaseHelper();
+
+        try {
+          // Save the note in the database
+          final insertedId = await dbHelper.insertNote(note);
+          print('Note saved successfully with ID: $insertedId');
+
+          // Show success message
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Note saved successfully!'),
+                backgroundColor: Colors.green,
+                duration: Duration(seconds: 2),
+              ),
+            );
+          }
+
+          // Clear the form
+          _titleController.clear();
+          _contentController.clear();
+
+          if (mounted) {
+            setState(() {
+              _selectedImage = null;
+            });
+          }
+
+          print('Form cleared successfully');
+        } catch (dbError) {
+          print('Database error while saving note: $dbError');
+          if (mounted) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text('Error saving note: ${dbError.toString()}'),
+                backgroundColor: Colors.red,
+                duration: const Duration(seconds: 3),
+              ),
+            );
+          }
+        }
+      } else {
+        print('Validation failed: Empty title or content');
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text('Please fill in both title and content.'),
+              backgroundColor: Colors.orange,
+              duration: Duration(seconds: 2),
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      print('Unexpected error in _saveNote: $e');
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text('An unexpected error occurred: ${e.toString()}'),
+            backgroundColor: Colors.red,
+            duration: const Duration(seconds: 3),
+          ),
+        );
+      }
     }
   }
+
+  String get _currentDateTime =>
+      DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.now());
 
   @override
   Widget build(BuildContext context) {
