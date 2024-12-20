@@ -79,7 +79,7 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                 border: OutlineInputBorder(),
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(),
             if (_selectedImage != null) ...[
               Image.file(_selectedImage!),
               const SizedBox(height: 16),
