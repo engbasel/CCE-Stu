@@ -116,15 +116,28 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add Note'),
+        backgroundColor: Colors.white,
+        leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: Icon(
+              Icons.arrow_back_ios_new,
+              color: Colors.black,
+            )),
+        title: const Text(
+          'Create Note',
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          // crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Date and Time: $_currentDateTime',
-                style: const TextStyle(fontSize: 16)),
             const SizedBox(height: 16),
             TextField(
               controller: _titleController,
@@ -136,25 +149,61 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
             const SizedBox(height: 16),
             TextField(
               controller: _contentController,
-              maxLines: 5,
               decoration: const InputDecoration(
                 labelText: 'Content',
                 border: OutlineInputBorder(),
               ),
+              maxLines: 5,
             ),
-            const SizedBox(),
-            if (_selectedImage != null) ...[
-              Image.file(_selectedImage!),
-              const SizedBox(height: 16),
-            ],
-            ElevatedButton(
-              onPressed: () => screenUtils.pickImage((file) {
-                setState(() {
-                  _selectedImage = file;
-                });
-              }),
-              child: const Text('Add Photo'),
-            ),
+            const SizedBox(height: 16),
+            _selectedImage == null
+                ? GestureDetector(
+                    onTap: () => screenUtils.pickImage((file) {
+                      setState(() {
+                        _selectedImage = file;
+                      });
+                    }),
+                    child: Container(
+                      height: 150,
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Center(
+                            child: Icon(
+                              Icons.camera_alt,
+                              size: 40,
+                              color: Colors.grey,
+                            ),
+                          ),
+                          const Text(
+                            'Note something down or click on image to upload image',
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                                fontSize: 16, fontStyle: FontStyle.italic),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )
+                : GestureDetector(
+                    onTap: () => screenUtils.pickImage((file) {
+                      setState(() {
+                        _selectedImage = file;
+                      });
+                    }),
+                    child: Image.file(
+                      _selectedImage!,
+                      height: 150,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+            const SizedBox(height: 16),
+
             const SizedBox(height: 16),
             SizedBox(
               width: double.infinity,
@@ -163,6 +212,47 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
                 child: const Text('Save Note'),
               ),
             ),
+
+            //   Text('Date and Time: $_currentDateTime',
+            //       style: const TextStyle(fontSize: 16)),
+            //   const SizedBox(height: 16),
+            //   TextField(
+            //     controller: _titleController,
+            //     decoration: const InputDecoration(
+            //       labelText: 'Title',
+            //       border: OutlineInputBorder(),
+            //     ),
+            //   ),
+            //   const SizedBox(height: 16),
+            //   TextField(
+            //     controller: _contentController,
+            //     maxLines: 5,
+            //     decoration: const InputDecoration(
+            //       labelText: 'Content',
+            //       border: OutlineInputBorder(),
+            //     ),
+            //   ),
+            //   const SizedBox(),
+            //   if (_selectedImage != null) ...[
+            //     Image.file(_selectedImage!),
+            //     const SizedBox(height: 16),
+            //   ],
+            //   ElevatedButton(
+            //     onPressed: () => screenUtils.pickImage((file) {
+            //       setState(() {
+            //         _selectedImage = file;
+            //       });
+            //     }),
+            //     child: const Text('Add Photo'),
+            //   ),
+            //   const SizedBox(height: 16),
+            //   SizedBox(
+            //     width: double.infinity,
+            //     child: ElevatedButton(
+            //       onPressed: _saveNote,
+            //       child: const Text('Save Note'),
+            //     ),
+            //   ),
           ],
         ),
       ),

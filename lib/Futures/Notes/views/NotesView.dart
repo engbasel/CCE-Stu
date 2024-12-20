@@ -95,7 +95,6 @@ class _NotesViewState extends State<NotesView> {
     );
   }
 
-  // Show note details in dialog
   void _showNoteDetails(Map<String, dynamic> note) {
     showDialog(
       context: context,
@@ -104,8 +103,22 @@ class _NotesViewState extends State<NotesView> {
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            if (note['image_path'] != null)
-              Image.file(File(note['image_path'])),
+            // Check if image_path is null or empty
+            note['image_path'] != null && note['image_path'].isNotEmpty
+                ? Image.file(File(note['image_path']))
+                : Column(
+                    spacing: 6,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text('No image selected',
+                          textAlign: TextAlign.center),
+                      Icon(
+                        Icons.camera_alt_outlined,
+                        color: Colors.grey,
+                      )
+                    ],
+                  ),
             const SizedBox(height: 16),
             Text(note['content'], textAlign: TextAlign.center),
             const SizedBox(height: 8),
