@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 
@@ -43,6 +46,15 @@ class ScreenUtils {
           .join(' '));
     }
     return lines.join('\n');
+  }
+
+  final ImagePicker _picker = ImagePicker();
+
+  Future<void> pickImage(Function(File) onImagePicked) async {
+    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
+    if (pickedFile != null) {
+      onImagePicked(File(pickedFile.path));
+    }
   }
 
   // Method to mark splash screen as seen

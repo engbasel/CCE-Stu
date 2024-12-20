@@ -1,5 +1,5 @@
+import 'package:cce_app/Core/utlis/utilis.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'dart:io';
 
@@ -14,19 +14,10 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _contentController = TextEditingController();
   File? _selectedImage;
-  final _picker = ImagePicker();
+  final ScreenUtils screenUtils = ScreenUtils();
 
   String get _currentDateTime =>
       DateFormat('yyyy-MM-dd – kk:mm').format(DateTime.now());
-
-  Future<void> _pickImage() async {
-    final pickedFile = await _picker.pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      setState(() {
-        _selectedImage = File(pickedFile.path);
-      });
-    }
-  }
 
   void _saveNote() {
     final title = _titleController.text.trim();
@@ -85,7 +76,11 @@ class _AddNoteScreenState extends State<AddNoteScreen> {
               const SizedBox(height: 16),
             ],
             ElevatedButton(
-              onPressed: _pickImage,
+              onPressed: () => screenUtils.pickImage((file) {
+                setState(() {
+                  _selectedImage = file;
+                });
+              }),
               child: const Text('Add Photo'),
             ),
             const SizedBox(height: 16),
