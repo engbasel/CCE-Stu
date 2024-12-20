@@ -21,9 +21,11 @@ class CommonNewsSection extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Text(
               'Common News',
-              style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
+              style: TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+                // add font ropoto to this section
+              ),
             ),
           ),
           const SizedBox(height: 12),
