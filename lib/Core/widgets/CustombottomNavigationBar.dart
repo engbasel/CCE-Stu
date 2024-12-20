@@ -1,6 +1,9 @@
 import 'package:cce_app/Futures/Home/widget/CustomDrawer.dart';
 import 'package:cce_app/Futures/Home/widget/HomeViewboady.dart';
+import 'package:cce_app/Futures/Notes/views/AddnotsView.dart';
+import 'package:cce_app/Futures/Notes/views/NotesView.dart';
 import 'package:cce_app/Futures/Subjects/views/subjectsView.dart';
+import 'package:cce_app/Futures/profile/views/profileview.dart';
 import 'package:flutter/material.dart';
 
 class CustomBottomNavigationBar extends StatefulWidget {
@@ -29,9 +32,8 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         children: const [
           HomeViewboady(),
           SubjectsView(),
-          Placeholder(), // Center action placeholder screen
-          NotesScreen(),
-          ProfileScreen(),
+          Notesview(),
+          Profileview(),
         ],
       ),
       bottomNavigationBar: Container(
@@ -42,6 +44,7 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
           borderRadius: BorderRadius.circular(40),
           boxShadow: [
             BoxShadow(
+              // ignore: deprecated_member_use
               color: Colors.black.withOpacity(0.1),
               blurRadius: 6,
               offset: const Offset(0, 3),
@@ -87,6 +90,8 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
   Widget buildCenterActionButton() {
     return GestureDetector(
       onTap: () {
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => const AddNoteScreen()));
         _pageController.animateToPage(
           2,
           duration: const Duration(milliseconds: 300),
@@ -94,36 +99,9 @@ class _CustomBottomNavigationBarState extends State<CustomBottomNavigationBar> {
         );
       },
       child: CircleAvatar(
-        radius: 28,
-        backgroundColor: Colors.white.withOpacity(0.2),
-        child: CircleAvatar(
           radius: 24,
-          backgroundColor: Colors.white,
-          child: const Icon(
-            Icons.add,
-            color: Colors.black,
-            size: 28,
-          ),
-        ),
-      ),
+          backgroundColor: Color(0xff3a6d8c),
+          child: Image.asset('assets/General/plus.png')),
     );
-  }
-}
-
-class NotesScreen extends StatelessWidget {
-  const NotesScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
-  }
-}
-
-class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return const Placeholder();
   }
 }
